@@ -1,5 +1,4 @@
 import React from "react";
-import './HomePage.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 
 function HomePage(props){
@@ -10,13 +9,13 @@ function HomePage(props){
                     <Navbar.Brand href="/">Home</Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link href="/">Products</Nav.Link>
-                        <Nav.Link href="/">Add</Nav.Link>
+                        <Nav.Link href="/medicine">Add</Nav.Link>
                         <Nav.Link href="/">Shipping</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
-            <div class="home">
-                <div class="home_container">
+            <div class="home_container">
+                <div class="home">
                     <table class="medicine_table">
                         <thead>
                             <tr>

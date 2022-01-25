@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import './RegisterPage.css';
 function RegisterPage(props){
     const [email,setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -12,22 +11,22 @@ function RegisterPage(props){
         navigate("/login");
     }
     return(
-        <div class="register_container">
-            <div class="register">
+        <div class="login_container">
+            <div class="login">
                 <h2>Register</h2>
-                <div class="email_container">
+                <div class="input_container">
                     <h5>Email</h5>
                     <input type="text" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
-                <div class="password_container">
+                <div class="input_container">
                     <h5>Password</h5>
                     <input type="password" id="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <div class="confirm_container">
+                <div class="input_container">
                     <h5>Confirm Password</h5>
                     <input type="password" id="password" placeholder="confirm password" value={confirm} onChange={(e) => setConfirm(e.target.value)}/>
                 </div>
-                <div class="identity_container">
+                <div class="input_container">
                     <h5>Identity</h5>
                     <select class="select_container" value={identity} onChange={(e) => setIdentity(e.target.value)}>
                         <option selected value="customer">Customer</option>
