@@ -1,19 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import './LoginPage.css';
-function LoginPage(props){
+import './RegisterPage.css';
+function RegisterPage(props){
     const [email,setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [confirm, setConfirm] = React.useState('');
     const [identity, setIdentity] = React.useState('customer');
     const navigate = useNavigate();
 
     const handleClick = (e) => {
-        navigate("/");
+        navigate("/login");
     }
     return(
-        <div class="login_container">
-            <div class="login">
-                <h2>Login</h2>
+        <div class="register_container">
+            <div class="register">
+                <h2>Register</h2>
                 <div class="email_container">
                     <h5>Email</h5>
                     <input type="text" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
@@ -21,6 +22,10 @@ function LoginPage(props){
                 <div class="password_container">
                     <h5>Password</h5>
                     <input type="password" id="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                <div class="confirm_container">
+                    <h5>Confirm Password</h5>
+                    <input type="password" id="password" placeholder="confirm password" value={confirm} onChange={(e) => setConfirm(e.target.value)}/>
                 </div>
                 <div class="identity_container">
                     <h5>Identity</h5>
@@ -31,19 +36,15 @@ function LoginPage(props){
                     </select>
                 </div>
                 <div class="options">
-                    <div class = "sign_up">
-                        <a href = "/register">Sign Up</a>
-                    </div>
-                    <br/>
-                    <div class = "forget_pw">
-                        <a href = "/">Forgot Password?</a>
+                    <div class = "log_in">
+                        <a href = "/login">Already have an account?</a>
                     </div>
                 </div>
                 <div class = "submit">
-                    <input type="button" onClick={handleClick} value="Login"/>
+                    <input type="button" onClick={handleClick} value="Sign Up"/>
                 </div>
             </div>
         </div>
     );
 }
-export default LoginPage;
+export default RegisterPage;
