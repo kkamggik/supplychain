@@ -16,7 +16,7 @@ function RegisterPage(props){
                 <h2>Register</h2>
                 <div class="input_container">
                     <h5>Email</h5>
-                    <input type="text" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="email" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div class="input_container">
                     <h5>Password</h5>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import './LoginPage.css';
+import './custom.css';
 function LoginPage(props){
     const [email,setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -16,7 +16,7 @@ function LoginPage(props){
                 <h2>Login</h2>
                 <div class="input_container">
                     <h5>Email</h5>
-                    <input type="text" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="email" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div class="input_container">
                     <h5>Password</h5>

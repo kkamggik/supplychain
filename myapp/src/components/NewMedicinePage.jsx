@@ -1,5 +1,5 @@
 import React from "react";
-import './HomePage.css';
+import './custom.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
