@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Form, Row, Col, Button, Card, Modal } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import './custom.css';
 import NavbarPage from './NavbarPage';
 import DatePicker from "react-datepicker";
@@ -9,6 +10,8 @@ function HomePage(props) {
     const [show, setShow] = React.useState(false);
     const [startDate, setStartDate] = React.useState(new Date());
     const [endDate, setEndDate] = React.useState(new Date());
+    const [medicineName, setMedicineName] = React.useState('');
+
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -16,6 +19,9 @@ function HomePage(props) {
         setStartDate(e)
         if (e >= endDate) setEndDate(e)
     }
+    const handleGenerate = () => {
+    }
+
     return (
         <div class="home_container">
             <div class="home">
@@ -60,7 +66,7 @@ function HomePage(props) {
                         <Form>
                             <Form.Group className="mb-3" controlId="medicineName">
                                 <Form.Label>Medicine Name</Form.Label>
-                                <Form.Control type="text" placeholder="Medicine Name" />
+                                <Form.Control type="text" placeholder="Medicine Name" onChange={(e) => setMedicineName(e.target.value)} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="manufacturerName">
                                 <Form.Label>Manufacturer Name</Form.Label>
@@ -90,11 +96,20 @@ function HomePage(props) {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                             </Button>
-                        <Button variant="primary" onClick={handleClose}>
-                            Save
-                            </Button>
+                        <Button variant="primary" onClick={handleGenerate}>
+                            <Link to={"/qrcode/"+medicineName} target="_blank">
+                                Save
+                            </Link>
+                        </Button>
                     </Modal.Footer>
                 </Modal>
+
+                {/* To read a qrcode
+                    <form enctype="multipart/form-data" action="http://api.qrserver.com/v1/read-qr-code/" method="POST">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+                    Choose QR code image to read/scan: <input name="file" type="file" />
+                    <input type="submit" value="Read QR code" />
+                </form> */}
             </div>
         </div>
     );
