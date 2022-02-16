@@ -10,20 +10,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Noto Sans KR", sans-serif;
+    font-family: "Merienda";
 }
 
 h2, h5 {
     font-family: "SedgwickAve";
 }
 
-div{
-    font-family: "Merienda";
-}
-
 a {
     text-decoration: none;
-    font-family: "Merienda";
     color: black;
 }
   
@@ -33,7 +28,9 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.1);
+    /* background: rgba(0, 0, 0, 0.1); */
+    background-color: #cdedfd;
+    background-image: linear-gradient(319deg, #cdedfd 0%, #ffec82 37%, #ffcfd2 100%);
 }
   
 .login {
@@ -52,7 +49,9 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.1);
+    /* background: rgba(0, 0, 0, 0.1); */
+    background-color: #cdedfd;
+    background-image: linear-gradient(319deg, #cdedfd 0%, #ffec82 37%, #ffcfd2 100%);
 }
 
 .home {
@@ -63,10 +62,28 @@ a {
     border-radius: 20px;
 }
 
+.medicine {
+    margin: auto;
+    width: 70%;
+}
+
+.medicine_container {
+    margin-top: 20px;
+    height: 75vh;
+    overflow-y: scroll;
+}
+
+.qr_container {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+}
+
 h2 {
     color: tomato;
     font-size: 2em;
 }
+
 .input_container {
     margin-top: 20px;
     width: 80%;

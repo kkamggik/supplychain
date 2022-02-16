@@ -1,66 +1,126 @@
-import React from "react";
-import { Container, Form, Row, Col, Button, Card, Modal } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-import './custom.css';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { Container, Form, Row, Col, Button, Modal, Table } from 'react-bootstrap';
 import NavbarPage from './NavbarPage';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import BlockchainContext from "./Context";
+
+var generator = require('generate-serial-number');
 
 function HomePage(props) {
-    const [show, setShow] = React.useState(false);
-    const [startDate, setStartDate] = React.useState(new Date());
-    const [endDate, setEndDate] = React.useState(new Date());
-    const [medicineName, setMedicineName] = React.useState('');
 
+    const [show, setShow] = useState(false);
+    const [sort, setSort] = useState('any');
+    const [keyword, setKeyword] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [medicineName, setMedicineName] = useState('');
+    const [manufacturerName, setManufacturerName] = useState('');
+    const [direction, setDirection] = useState('');
+
+    const blockchainContext = useContext(BlockchainContext);
+    const {web3, contract, account} = blockchainContext;
+
+    const [medcnt, setMedcnt] = useState(0);
+    const [medicines, setMedicines] = useState([]);
+
+    useEffect(() => {
+        getMedicines()
+    },[])
+
+    async function getMedicines() {
+        setMedicines([]);
+        const medicineCount = await contract.methods.medicineCount().call();
+        setMedcnt(medicineCount);
+        for (let i = 1; i <= medicineCount; i++) {
+            const medicine = await contract.methods.medicines(i).call();
+            if (medicine.state === "1") setMedicines(medicines => [...medicines, medicine])
+        }
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleDate = (e) => {
-        setStartDate(e)
-        if (e >= endDate) setEndDate(e)
+
+    const handleGenerate = (e) => {
+        var serialNumber = generator.generate(16);
+        contract.methods.addMedicine(medicineName, manufacturerName, serialNumber, direction, startDate, endDate).send({ from: account })
+            .once('receipt', (receipt) => {
+                getMedicines();
+                window.open(`/qrcode/${serialNumber}`, "_blank");
+            })
+        handleClose();
+        e.preventDefault();
     }
-    const handleGenerate = () => {
+
+    const displayMedicines = () => {
+        return medicines.map(medicine => {
+            return (
+                <tr>
+                    <td>{medicine.id}</td>
+                    <td>{medicine.name}</td>
+                    <td><Link to="/medicine" state={{ medicine: medicine }}> {medicine.serial}</Link></td>
+                </tr>
+            )
+        })
+    }
+
+    const handleSort = (e) => {
+        // let filtered;
+        // if(keyword==='') filtered = medicines;
+        // else if(sort==="medicineName"){
+        //     filtered = medicines.filter((medicine) => medicine.name===keyword);
+        // }else if(sort==="serialNumber"){
+        //     filtered = medicines.filter((medicine) => medicine.medicine_serial===keyword);
+        // }else if(sort==="id"){
+        //     filtered = medicines.filter((medicine) => medicine.id===keyword);
+        // }
+        // displayMedicines();
+        // e.preventDefault();
     }
 
     return (
-        <div class="home_container">
-            <div class="home">
-                <NavbarPage/>
+        <div className="home_container">
+            <div className="home">
+                <NavbarPage />
                 <Container>
                     <Form className="mt-3">
                         <Row className="justify-content-end">
-                            <Col ml="auto" className="my-1">
-                                <Button variant="warning" onClick={handleShow}>Add Medicine</Button>
-                            </Col>
                             <Col xs={2} className="my-1">
-                                <Form.Select id="sortBy" defaultValue="any">
-                                    <option value="any">Any</option>
-                                    <option value="manufacturerName">Manufacturer</option>
-                                    <option value="medicineName">Name</option>
+                                <Form.Select id="sortBy" defaultValue="any" onChange={(e) => setSort(e.target.value)}>
+                                    <option value="any">Search By</option>
+                                    <option value="id">ID</option>
+                                    <option value="serialNumber">Serial Number</option>
+                                    <option value="medicineName">Medicine Name</option>
                                 </Form.Select>
                             </Col>
                             <Col xs={2} className="my-1">
-                                <Form.Control type="text" id="keyword" placeholder="keyword" />
+                                <Form.Control type="text" id="keyword" placeholder="keyword" onChange={(e) => setKeyword(e.target.value)}/>
                             </Col>
                             <Col xs="auto" className="my-1">
-                                <Button type="submit">Submit</Button>
+                                <Button type="submit" onClick={handleSort}>Submit</Button>
                             </Col>
                         </Row>
                     </Form>
-                    <Card className="text-center mt-3">
-                        <Card.Header>Medicine ID</Card.Header>
-                        <Card.Body>
-                            <Card.Title>타이레놀</Card.Title>
-                            <Card.Text>
-                                With supporting text below as a natural lead-in to additional content.
-                                    </Card.Text>
-                            <Button variant="success">Shipping</Button>
-                        </Card.Body>
-                    </Card>
+                    <div className="medicine">
+                        <Button variant="warning" onClick={handleShow}>Add Medicine</Button>
+                        <div className="medicine_container">
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Medicine Name</th>
+                                        <th>Serial Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {displayMedicines(medicines)}
+                                </tbody>
+                            </Table>
+                        </div>
+                    </div>
                 </Container>
                 <Modal show={show} onHide={handleClose} backdrop="static">
                     <Modal.Header closeButton>
-                        <Modal.Title>new medicine</Modal.Title>
+                        <Modal.Title>New Medicine</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
@@ -70,14 +130,14 @@ function HomePage(props) {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="manufacturerName">
                                 <Form.Label>Manufacturer Name</Form.Label>
-                                <Form.Control type="text" placeholder="Manufacturer Name" />
+                                <Form.Control type="text" placeholder="Manufacturer Name" onChange={(e) => setManufacturerName(e.target.value)} />
                             </Form.Group>
                             <Row className="align-items-center">
                                 <Col xs={6}>
                                     <Form.Group className="mb-3" controlId="manufacturerName">
                                         <Form.Label>Manufacturered Date</Form.Label>
                                         <div class="date_container">
-                                            <DatePicker selected={startDate} minDate={new Date()} onChange={handleDate} />
+                                            <input type="date" onChange={(e) => setStartDate(e.target.value)}/>
                                         </div>
                                     </Form.Group>
                                 </Col>
@@ -85,22 +145,20 @@ function HomePage(props) {
                                     <Form.Group className="mb-3" controlId="manufacturerName">
                                         <Form.Label>Expiry Date</Form.Label>
                                         <div class="date_container">
-                                            <DatePicker selected={endDate} minDate={startDate} onChange={(date) => setEndDate(date)} />
+                                            <input type="date" onChange={(e) => setEndDate(e.target.value)}/>
                                         </div>
                                     </Form.Group>
                                 </Col>
                             </Row>
+                            <Form.Group className="mb-3" controlId="direaction">
+                                <Form.Label>Directions</Form.Label>
+                                <Form.Control as="textarea" placeholder="Describe directions" onChange={(e) => setDirection(e.target.value)} rows={4} />
+                            </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                            </Button>
-                        <Button variant="primary" onClick={handleGenerate}>
-                            <Link to={"/qrcode/"+medicineName} target="_blank">
-                                Save
-                            </Link>
-                        </Button>
+                        <Button variant="secondary" onClick={handleClose}>Close</Button>
+                        <Button variant="primary" onClick={handleGenerate}>Save</Button>
                     </Modal.Footer>
                 </Modal>
 
@@ -115,3 +173,4 @@ function HomePage(props) {
     );
 }
 export default HomePage;
+

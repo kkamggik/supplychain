@@ -8,7 +8,7 @@ function NavbarPage() {
                 <Navbar.Collapse id="navbar-light-example">
                     <Nav>
                         <NavDropdown id="nav-dropdown-light-example" title="Accounts" menuVariant="light" >
-                            <NavDropdown.Item href="/">Another action</NavDropdown.Item>
+                            <NavDropdown.Item href="/">Profile</NavDropdown.Item>
                             <NavDropdown.Item href="/">Something</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
