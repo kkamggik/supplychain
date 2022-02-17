@@ -28,13 +28,17 @@ function HomePage(props) {
     },[])
 
     async function getMedicines() {
+        // setMedicines([]);
+        // const medicineCount = await contract.methods.medicineCount().call();
+        // setMedcnt(medicineCount);
+        // for (let i = 1; i <= medicineCount; i++) {
+        //     const medicine = await contract.methods.medicines(i).call();
+        //     console.log(medicine)
+        //     setMedicines(medicines => [...medicines, medicine])
+        // }
         setMedicines([]);
-        const medicineCount = await contract.methods.medicineCount().call();
-        setMedcnt(medicineCount);
-        for (let i = 1; i <= medicineCount; i++) {
-            const medicine = await contract.methods.medicines(i).call();
-            if (medicine.state === "1") setMedicines(medicines => [...medicines, medicine])
-        }
+        const medicine = await contract.methods.getMedicine(1).call();
+        setMedicines(medicine);
     }
 
     const handleClose = () => setShow(false);
@@ -42,7 +46,7 @@ function HomePage(props) {
 
     const handleGenerate = (e) => {
         var serialNumber = generator.generate(16);
-        contract.methods.addMedicine(medicineName, manufacturerName, serialNumber, direction, startDate, endDate).send({ from: account })
+        contract.methods.addMedicine(medicineName, serialNumber, direction, startDate, endDate).send({ from: account })
             .once('receipt', (receipt) => {
                 getMedicines();
                 window.open(`/qrcode/${serialNumber}`, "_blank");
@@ -81,6 +85,7 @@ function HomePage(props) {
         <div className="home_container">
             <div className="home">
                 <NavbarPage />
+                {console.log(medicines)}
                 <Container>
                     <Form className="mt-3">
                         <Row className="justify-content-end">
@@ -161,13 +166,6 @@ function HomePage(props) {
                         <Button variant="primary" onClick={handleGenerate}>Save</Button>
                     </Modal.Footer>
                 </Modal>
-
-                {/* To read a qrcode
-                    <form enctype="multipart/form-data" action="http://api.qrserver.com/v1/read-qr-code/" method="POST">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-                    Choose QR code image to read/scan: <input name="file" type="file" />
-                    <input type="submit" value="Read QR code" />
-                </form> */}
             </div>
         </div>
     );

@@ -5,6 +5,7 @@ import HomePage from './components/HomePage';
 import RegisterPage from './components/RegisterPage';
 import QRcodePage from './components/QRcodePage';
 import Medicine from './components/DetailPage';
+import Scan from './components/ScanPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlockchainContext from "./components/Context";
 import Web3 from 'web3/dist/web3.min.js';
@@ -28,7 +29,10 @@ function App() {
 }, []);
   if (web3==null || account==null || contract==null){
     return(
-      <div>is loading...</div>
+      <div className="home_container">
+        <div className="home">
+        </div>
+      </div>
     )
   }
   return (
@@ -40,6 +44,7 @@ function App() {
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/qrcode/:id" element={<QRcodePage/>} />
         <Route path="/medicine" element={<Medicine/>} />
+        <Route path="/scan" element={<Scan/>} />
       </Routes>
     </BrowserRouter>
     </BlockchainContext.Provider> 

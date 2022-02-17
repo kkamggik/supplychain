@@ -7,10 +7,10 @@ function NavbarPage() {
                 <Navbar.Toggle aria-controls="navbar-light-example" />
                 <Navbar.Collapse id="navbar-light-example">
                     <Nav>
-                        <NavDropdown id="nav-dropdown-light-example" title="Accounts" menuVariant="light" >
-                            <NavDropdown.Item href="/">Profile</NavDropdown.Item>
-                            <NavDropdown.Item href="/">Something</NavDropdown.Item>
+                        <NavDropdown id="nav-dropdown-light-example" title="More" menuVariant="light" >
+                            <NavDropdown.Item href="/scan">Scan</NavDropdown.Item>
                             <NavDropdown.Divider />
+                            <NavDropdown.Item href="/">Profile</NavDropdown.Item>
                             <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>

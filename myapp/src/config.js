@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0xA5B51C939E1018366ac99E45b721312C2880a024'
+export const SUPPLY_CHAIN_ADDRESS = '0xA4d5840509AB04596eA37DDaDE02D4E9eEb5E4d8'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -15,6 +15,42 @@ export const SUPPLY_CHAIN_ABI = [
     "stateMutability": "view",
     "type": "function",
     "signature": "0x07973ccf"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "users",
+    "outputs": [
+      {
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "company",
+        "type": "string"
+      },
+      {
+        "name": "addr",
+        "type": "string"
+      },
+      {
+        "name": "identity",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x365b98b2"
   },
   {
     "constant": true,
@@ -58,11 +94,7 @@ export const SUPPLY_CHAIN_ABI = [
         "type": "uint256"
       },
       {
-        "name": "timeStamp_sent",
-        "type": "uint256"
-      },
-      {
-        "name": "timeStamp_recv",
+        "name": "time",
         "type": "uint256"
       }
     ],
@@ -105,12 +137,12 @@ export const SUPPLY_CHAIN_ABI = [
         "type": "string"
       },
       {
-        "name": "mName",
+        "name": "serial",
         "type": "string"
       },
       {
-        "name": "serial",
-        "type": "string"
+        "name": "holder",
+        "type": "uint256"
       },
       {
         "name": "manufacturer",
@@ -153,6 +185,10 @@ export const SUPPLY_CHAIN_ABI = [
         "type": "string"
       },
       {
+        "name": "_company",
+        "type": "string"
+      },
+      {
         "name": "_addr",
         "type": "string"
       },
@@ -170,17 +206,13 @@ export const SUPPLY_CHAIN_ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0xb48ff0f1"
+    "signature": "0xdbbed8ad"
   },
   {
     "constant": false,
     "inputs": [
       {
         "name": "_name",
-        "type": "string"
-      },
-      {
-        "name": "_mName",
         "type": "string"
       },
       {
@@ -205,7 +237,7 @@ export const SUPPLY_CHAIN_ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0x32a486d8"
+    "signature": "0x7bae75b5"
   },
   {
     "constant": false,
@@ -223,11 +255,127 @@ export const SUPPLY_CHAIN_ABI = [
     "signature": "0x9bfff076"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getMedicine",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "serial",
+            "type": "string"
+          },
+          {
+            "name": "holder",
+            "type": "uint256"
+          },
+          {
+            "name": "manufacturer",
+            "type": "uint256"
+          },
+          {
+            "name": "directions",
+            "type": "string"
+          },
+          {
+            "name": "mDate",
+            "type": "string"
+          },
+          {
+            "name": "eDate",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xa6742265"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_serial",
+        "type": "string"
+      }
+    ],
+    "name": "getMedicineBySerial",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "serial",
+            "type": "string"
+          },
+          {
+            "name": "holder",
+            "type": "uint256"
+          },
+          {
+            "name": "manufacturer",
+            "type": "uint256"
+          },
+          {
+            "name": "directions",
+            "type": "string"
+          },
+          {
+            "name": "mDate",
+            "type": "string"
+          },
+          {
+            "name": "eDate",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x5904fb33"
+  },
+  {
     "constant": false,
     "inputs": [
       {
         "name": "_destination",
-        "type": "address"
+        "type": "uint256"
       },
       {
         "name": "_medicine",
@@ -239,6 +387,21 @@ export const SUPPLY_CHAIN_ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0xd0679d34"
+    "signature": "0xd56768eb"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_medicine",
+        "type": "uint256"
+      }
+    ],
+    "name": "receive",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xcba2534f"
   }
 ]
