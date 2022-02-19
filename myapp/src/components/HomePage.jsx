@@ -9,6 +9,7 @@ var generator = require('generate-serial-number');
 function HomePage(props) {
 
     const [show, setShow] = useState(false);
+    const [showQR, setShowQR] = useState(false);
     const [sort, setSort] = useState('any');
     const [keyword, setKeyword] = useState('');
     const [startDate, setStartDate] = useState(new Date());
@@ -16,6 +17,7 @@ function HomePage(props) {
     const [medicineName, setMedicineName] = useState('');
     const [manufacturerName, setManufacturerName] = useState('');
     const [direction, setDirection] = useState('');
+    const [serialNumber, setSerialNumber] = useState('');
 
     const blockchainContext = useContext(BlockchainContext);
     const {web3, contract, account} = blockchainContext;
@@ -37,21 +39,27 @@ function HomePage(props) {
         //     setMedicines(medicines => [...medicines, medicine])
         // }
         setMedicines([]);
-        const medicine = await contract.methods.getMedicine(1).call();
+        const medicine = await contract.methods.getMedicine(2).call();
         setMedicines(medicine);
     }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleQRClose = () => setShowQR(false);
+    const handleQRShow = () => setShowQR(true);
+    
 
     const handleGenerate = (e) => {
-        var serialNumber = generator.generate(16);
-        contract.methods.addMedicine(medicineName, serialNumber, direction, startDate, endDate).send({ from: account })
-            .once('receipt', (receipt) => {
-                getMedicines();
-                window.open(`/qrcode/${serialNumber}`, "_blank");
-            })
         handleClose();
+        var serial = generator.generate(16);
+        setSerialNumber(serial);
+        contract.methods.addMedicine(medicineName, serial, direction, startDate, endDate).send({ from: account })
+            .once('receipt', (receipt) => {
+                handleQRShow();
+                getMedicines();
+                // window.open(`/qrcode/${serialNumber}`, "_blank");
+            })
+        // handleQRShow();
         e.preventDefault();
     }
 
@@ -61,7 +69,7 @@ function HomePage(props) {
                 <tr>
                     <td>{medicine.id}</td>
                     <td>{medicine.name}</td>
-                    <td><Link to="/medicine" state={{ medicine: medicine }}> {medicine.serial}</Link></td>
+                    <td><Link to="/medicine" state={{ medicine: medicine }} style={{textDecoration:"none"}}> {medicine.serial}</Link></td>
                 </tr>
             )
         })
@@ -85,7 +93,6 @@ function HomePage(props) {
         <div className="home_container">
             <div className="home">
                 <NavbarPage />
-                {console.log(medicines)}
                 <Container>
                     <Form className="mt-3">
                         <Row className="justify-content-end">
@@ -164,6 +171,19 @@ function HomePage(props) {
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>Close</Button>
                         <Button variant="primary" onClick={handleGenerate}>Save</Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showQR} onHide={handleQRClose} backdrop="static">
+                    <Modal.Header closeButton>
+                        <Modal.Title>QR code</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div style={{display:"flex", justifyContent:"center"}}>
+                            <img src={"https://api.qrserver.com/v1/create-qr-code/?data="+serialNumber+"&amp;size=100x100"} alt="" title="qrcode"/>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleQRClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

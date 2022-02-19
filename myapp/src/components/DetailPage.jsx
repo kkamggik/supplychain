@@ -31,7 +31,7 @@ function DetailPage() {
         const userCnt = await contract.methods.userCount().call();
         for (let i = 1; i <= userCnt; i++) {
             const user = await contract.methods.users(i).call();
-            setUsers(users => [...users, user])
+            if(user.identity==="2" || user.identity==="3") setUsers(users => [...users, user])
         }
     }
 
@@ -78,18 +78,21 @@ function DetailPage() {
                                 <div>Directions:</div>
                                 <div style={{whiteSpace: "pre-wrap"}}>{medicine.directions}</div>
                             </Card.Text>
-                            <Button variant="danger" value={medicine.id} onClick={handleRemove}>Discard</Button>
-                            <Button variant="warning" onClick={handleShow}>Ship</Button>
-                            <Button variant="primary" onClick={handleReceive}>Receive</Button>
+                            <div style={{display:"flex", justifyContent:"space-evenly"}}>
+                                <Button variant="danger" value={medicine.id} onClick={handleRemove}>Discard</Button>
+                                <Button variant="warning" onClick={handleShow}>Ship</Button>
+                                <Button variant="primary" onClick={handleReceive}>Receive</Button>
+                            </div> 
                         </Card.Body>
                     </Card>
+
                     <Modal show={show} onHide={handleClose} backdrop="static">
                     <Modal.Header closeButton>
                         <Modal.Title>Ship Medicine</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            <Form.Group className="mb-3" controlId="direaction">
+                            <Form.Group className="mb-3" controlId="direction">
                                 <Form.Label>Shipping Addresses</Form.Label>
                                 <Form.Select onChange={(e) => setDestination(e.target.value)}>
                                     <option value="0"> Select destination</option>
