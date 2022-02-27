@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import './custom.css';
 function LoginPage(props){
     const [email,setEmail] = React.useState('');
@@ -11,7 +12,7 @@ function LoginPage(props){
         navigate("/");
     }
     return(
-        <div class="login_container">
+        <div class="outer_container">
             <div class="login">
                 <h2>Login</h2>
                 <div class="input_container">
@@ -32,11 +33,13 @@ function LoginPage(props){
                 </div>
                 <div class="options">
                     <div class = "sign_up">
-                        <a href = "/register">Sign Up</a>
+                        {/* <a href = "/register">Sign Up</a> */}
+                        <Link to="/register">Sign Up</Link>
                     </div>
                     <br/>
                     <div class = "forget_pw">
-                        <a href = "/">Forgot Password?</a>
+                        {/* <a href = "/">Forgot Password?</a> */}
+                        <Link to="/">Forgot password?</Link>
                     </div>
                 </div>
                 <div class = "submit">

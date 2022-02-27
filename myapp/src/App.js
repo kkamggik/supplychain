@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 import RegisterPage from './components/RegisterPage';
-import QRcodePage from './components/QRcodePage';
 import Medicine from './components/DetailPage';
 import Scan from './components/ScanPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -42,7 +41,6 @@ function App() {
         <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
-        <Route path="/qrcode/:id" element={<QRcodePage/>} />
         <Route path="/medicine" element={<Medicine/>} />
         <Route path="/scan" element={<Scan/>} />
       </Routes>

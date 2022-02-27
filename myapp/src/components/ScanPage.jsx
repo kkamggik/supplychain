@@ -15,7 +15,7 @@ function ScanPage() {
 
     async function getMedicine(serial) {
         const med = await contract.methods.getMedicineBySerial(serial).call();
-        navigate("/medicine",{ state: { medicine: med }})
+        navigate("/medicine", { state: { medicine: med } })
     }
 
     const handleSubmit = (e) => {
@@ -26,7 +26,7 @@ function ScanPage() {
             method: "post",
             url: "http://api.qrserver.com/v1/read-qr-code/",
             data: bodyFormData,
-            headers: {'Content-Type': 'multipart/form-data' }
+            headers: { 'Content-Type': 'multipart/form-data' }
         }).then((result) => {
             const serial = result.data[0].symbol[0].data;
             getMedicine(serial);
@@ -39,17 +39,13 @@ function ScanPage() {
     }
 
     return (
-        <div className="home_container">
+        <div className="outer_container">
             <div className="home">
                 <NavbarPage />
-                <div className="item_container">
-                    <form onSubmit={handleSubmit}>
-                        <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-                        <input name="file" type="file" onChange={handleFileSelect}/>
-                        <div class = "qr_submit">
-                            <input type="submit" value="Read QR code"/>
-                        </div>
-                    </form>
+                <div className="display" style={{display:"flex", flexDirection: "column", alignItems: "center", marginTop:"20em"}}>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+                    <input name="file" type="file" onChange={handleFileSelect} style={{marginLeft:"8em"}}/>
+                    <button onClick={handleSubmit} className="button_read">Read QR code</button>
                 </div>
             </div>
         </div>

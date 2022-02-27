@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Form, Row, Col, Button, Modal, Table } from 'react-bootstrap';
+import { Form, Row, Col, Button, Modal, Table } from 'react-bootstrap';
 import NavbarPage from './NavbarPage';
 import BlockchainContext from "./Context";
+import Display from './Display';
+import Search from './Search';
 
 var generator = require('generate-serial-number');
 
-function HomePage(props) {
+function HomePage() {
 
     const [show, setShow] = useState(false);
     const [showQR, setShowQR] = useState(false);
-    const [sort, setSort] = useState('any');
-    const [keyword, setKeyword] = useState('');
+
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [medicineName, setMedicineName] = useState('');
@@ -20,27 +21,23 @@ function HomePage(props) {
     const [serialNumber, setSerialNumber] = useState('');
 
     const blockchainContext = useContext(BlockchainContext);
-    const {web3, contract, account} = blockchainContext;
+    const { web3, contract, account } = blockchainContext;
 
     const [medcnt, setMedcnt] = useState(0);
     const [medicines, setMedicines] = useState([]);
 
     useEffect(() => {
         getMedicines()
-    },[])
+    }, [])
 
     async function getMedicines() {
-        // setMedicines([]);
-        // const medicineCount = await contract.methods.medicineCount().call();
-        // setMedcnt(medicineCount);
-        // for (let i = 1; i <= medicineCount; i++) {
-        //     const medicine = await contract.methods.medicines(i).call();
-        //     console.log(medicine)
-        //     setMedicines(medicines => [...medicines, medicine])
-        // }
         setMedicines([]);
-        const medicine = await contract.methods.getMedicine(2).call();
-        setMedicines(medicine);
+        const medicineCount = await contract.methods.medicineCount().call();
+        setMedcnt(medicineCount);
+        for (let i = 1; i <= medicineCount; i++) {
+            const medicine = await contract.methods.medicines(i).call();
+            if (medicine.state === "1") setMedicines(medicines => [...medicines, medicine])
+        }
     }
 
     const handleClose = () => setShow(false);
@@ -48,7 +45,6 @@ function HomePage(props) {
     const handleQRClose = () => setShowQR(false);
     const handleQRShow = () => setShowQR(true);
     
-
     const handleGenerate = (e) => {
         handleClose();
         var serial = generator.generate(16);
@@ -57,79 +53,19 @@ function HomePage(props) {
             .once('receipt', (receipt) => {
                 handleQRShow();
                 getMedicines();
-                // window.open(`/qrcode/${serialNumber}`, "_blank");
             })
-        // handleQRShow();
         e.preventDefault();
     }
 
-    const displayMedicines = () => {
-        return medicines.map(medicine => {
-            return (
-                <tr>
-                    <td>{medicine.id}</td>
-                    <td>{medicine.name}</td>
-                    <td><Link to="/medicine" state={{ medicine: medicine }} style={{textDecoration:"none"}}> {medicine.serial}</Link></td>
-                </tr>
-            )
-        })
-    }
-
-    const handleSort = (e) => {
-        // let filtered;
-        // if(keyword==='') filtered = medicines;
-        // else if(sort==="medicineName"){
-        //     filtered = medicines.filter((medicine) => medicine.name===keyword);
-        // }else if(sort==="serialNumber"){
-        //     filtered = medicines.filter((medicine) => medicine.medicine_serial===keyword);
-        // }else if(sort==="id"){
-        //     filtered = medicines.filter((medicine) => medicine.id===keyword);
-        // }
-        // displayMedicines();
-        // e.preventDefault();
-    }
-
     return (
-        <div className="home_container">
+        <div className="outer_container">
             <div className="home">
                 <NavbarPage />
-                <Container>
-                    <Form className="mt-3">
-                        <Row className="justify-content-end">
-                            <Col xs={2} className="my-1">
-                                <Form.Select id="sortBy" defaultValue="any" onChange={(e) => setSort(e.target.value)}>
-                                    <option value="any">Search By</option>
-                                    <option value="id">ID</option>
-                                    <option value="serialNumber">Serial Number</option>
-                                    <option value="medicineName">Medicine Name</option>
-                                </Form.Select>
-                            </Col>
-                            <Col xs={2} className="my-1">
-                                <Form.Control type="text" id="keyword" placeholder="keyword" onChange={(e) => setKeyword(e.target.value)}/>
-                            </Col>
-                            <Col xs="auto" className="my-1">
-                                <Button type="submit" onClick={handleSort}>Submit</Button>
-                            </Col>
-                        </Row>
-                    </Form>
-                    <div className="medicine">
-                        <Button variant="warning" onClick={handleShow}>Add Medicine</Button>
-                        <div className="medicine_container">
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Medicine Name</th>
-                                        <th>Serial Number</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {displayMedicines(medicines)}
-                                </tbody>
-                            </Table>
-                        </div>
-                    </div>
-                </Container>
+                <div className="display">
+                    <Button variant="warning" onClick={handleShow}>Add Medicine</Button>
+                    <Search />
+                    <Display medicines={medicines} />
+                </div>
                 <Modal show={show} onHide={handleClose} backdrop="static">
                     <Modal.Header closeButton>
                         <Modal.Title>New Medicine</Modal.Title>
@@ -149,7 +85,7 @@ function HomePage(props) {
                                     <Form.Group className="mb-3" controlId="manufacturerName">
                                         <Form.Label>Manufacturered Date</Form.Label>
                                         <div class="date_container">
-                                            <input type="date" onChange={(e) => setStartDate(e.target.value)}/>
+                                            <input type="date" onChange={(e) => setStartDate(e.target.value)} />
                                         </div>
                                     </Form.Group>
                                 </Col>
@@ -157,7 +93,7 @@ function HomePage(props) {
                                     <Form.Group className="mb-3" controlId="manufacturerName">
                                         <Form.Label>Expiry Date</Form.Label>
                                         <div class="date_container">
-                                            <input type="date" onChange={(e) => setEndDate(e.target.value)}/>
+                                            <input type="date" onChange={(e) => setEndDate(e.target.value)} />
                                         </div>
                                     </Form.Group>
                                 </Col>

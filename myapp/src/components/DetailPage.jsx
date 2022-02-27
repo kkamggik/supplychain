@@ -1,7 +1,7 @@
 import { React, useContext, useState, useEffect} from "react";
 import { useLocation, useNavigate } from 'react-router-dom'
 import NavbarPage from './NavbarPage';
-import { Card, Button, Modal, Form} from 'react-bootstrap';
+import { Card, Form, Row, Col, Button, Modal, Table } from 'react-bootstrap';
 import BlockchainContext from "./Context";
 
 
@@ -35,12 +35,11 @@ function DetailPage() {
         }
     }
 
-
     const url = "https://api.qrserver.com/v1/create-qr-code/?data="+medicine.serial;
 
     const handleRemove = (e) => {
-        console.log("discard medicine");
-        contract.methods.removeMedicine(e.target.value).send({ from: account })
+        console.log(`remove medicine #${medicine.id}`);
+        contract.methods.removeMedicine(medicine.id).send({ from: account })
             .once('receipt', (receipt) => {
             navigate("/");
         })
@@ -53,7 +52,7 @@ function DetailPage() {
             navigate("/");
         })
     }
-
+    
     const handleReceive = (e) => {
         console.log("receive medicine");
         contract.methods.receive(medicine.id).send({ from: account })
@@ -63,30 +62,30 @@ function DetailPage() {
     }
 
     return (
-        <div className="home_container">
+        <div className="outer_container">
             <div className="home">
                 <NavbarPage />
-                <div className="item_container">
-                    <Card className="text-center">
-                        <Card.Img variant="top" src={url} style={{width: 200, height: 200, margin: "auto", marginTop:20}}/>
-                        <Card.Body>
-                            <Card.Title>{medicine.name}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{medicine.serial}</Card.Subtitle>
-                            <Card.Text>
-                                <div>Manufactured Date: {medicine.mDate}</div>
-                                <div>Expiry Date: {medicine.eDate}</div>
-                                <div>Directions:</div>
-                                <div style={{whiteSpace: "pre-wrap"}}>{medicine.directions}</div>
-                            </Card.Text>
-                            <div style={{display:"flex", justifyContent:"space-evenly"}}>
-                                <Button variant="danger" value={medicine.id} onClick={handleRemove}>Discard</Button>
-                                <Button variant="warning" onClick={handleShow}>Ship</Button>
-                                <Button variant="primary" onClick={handleReceive}>Receive</Button>
-                            </div> 
-                        </Card.Body>
-                    </Card>
-
-                    <Modal show={show} onHide={handleClose} backdrop="static">
+                <Card className="text-center" style={{marginTop: 50}}>
+                    <Card.Img variant="top" src={url} style={{width: 200, height: 200, margin: "auto", marginTop:20}}/>
+                    <Card.Body>
+                        <Card.Title>{medicine.name}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{medicine.serial}</Card.Subtitle>
+                        <Card.Text>
+                            <div>Manufacturer: {medicine.mName}</div>
+                            <div>Manufactured Date: {medicine.mDate}</div>
+                            <div>Expiry Date: {medicine.eDate}</div>
+                            <div>Directions:</div>
+                            <div style={{whiteSpace: "pre-wrap"}}>{medicine.directions}</div>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+                <div className="button_container">
+                    <button className="button_remove" onClick={handleRemove}>Discard</button>
+                    <button className="button_ship" onClick={handleShow}>Ship</button>
+                    <button className="button_receive" onClick={handleReceive}>Receive</button>
+                </div>
+            </div>
+            <Modal show={show} onHide={handleClose} backdrop="static">
                     <Modal.Header closeButton>
                         <Modal.Title>Ship Medicine</Modal.Title>
                     </Modal.Header>
@@ -110,8 +109,6 @@ function DetailPage() {
                         <Button variant="primary" onClick={handleShip}>Submit</Button>
                     </Modal.Footer>
                 </Modal>
-                </div>
-            </div>
         </div>
     );
 }

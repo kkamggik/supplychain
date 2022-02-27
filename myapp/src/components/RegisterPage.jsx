@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 function RegisterPage(props){
     const [email,setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -11,7 +13,7 @@ function RegisterPage(props){
         navigate("/login");
     }
     return(
-        <div class="login_container">
+        <div class="outer_container">
             <div class="login">
                 <h2>Register</h2>
                 <div class="input_container">
@@ -36,7 +38,8 @@ function RegisterPage(props){
                 </div>
                 <div class="options">
                     <div class = "log_in">
-                        <a href = "/login">Already have an account?</a>
+                        {/* <a href = "/login">Already have an account?</a> */}
+                        <Link to="/login">Already have an account?</Link>
                     </div>
                 </div>
                 <div class = "submit">
