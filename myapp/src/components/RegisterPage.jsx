@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import BlockchainContext from "./Context";
@@ -21,7 +21,7 @@ function RegisterPage(props){
     const navigate = useNavigate();
 
     const handleClick = (e) => {
-        if(first=='' || last=='' || address=='' || region=='' || postcode=='' || country==''){
+        if(first==='' || last==='' || address==='' || region==='' || postcode==='' || country===''){
             alert("Fill in all required fields.")
         }else{
             const name = first+" "+last;
@@ -39,14 +39,14 @@ function RegisterPage(props){
                 <div class="signup_input_container">
                     <label>
                         <span>First Name</span>
-                        {first=='' ? <input type="text" id="first" placeholder="First Name" value={first} onChange={(e) => setFirst(e.target.value)} style={{border: "1px solid red"}}/> 
+                        {first==='' ? <input type="text" id="first" placeholder="First Name" value={first} onChange={(e) => setFirst(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="first" placeholder="First Name" value={first} onChange={(e) => setFirst(e.target.value)}/>}  
                     </label>
                 </div>
                 <div class="signup_input_container">
                     <label>
                         <span>Last Name</span>
-                        {last=='' ? <input type="text" id="last" placeholder="Last Name" value={last} onChange={(e) => setLast(e.target.value)} style={{border: "1px solid red"}}/> 
+                        {last==='' ? <input type="text" id="last" placeholder="Last Name" value={last} onChange={(e) => setLast(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="last" placeholder="Last Name" value={last} onChange={(e) => setLast(e.target.value)}/>}  
                     </label>
                 </div>
@@ -65,28 +65,28 @@ function RegisterPage(props){
                 <div class="signup_input_container">
                     <label>
                         <span>Address</span>
-                        {address=='' ? <input type="text" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} style={{border: "1px solid red"}}/>
+                        {address==='' ? <input type="text" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} style={{border: "1px solid red"}}/>
                         : <input type="text" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)}/>}  
                     </label>
                 </div>
                 <div class="signup_input_container">
                     <label>
                         <span>Region</span>
-                        {last=='' ? <input type="text" id="region" placeholder="Region" value={region} onChange={(e) => setRegion(e.target.value)} style={{border: "1px solid red"}}/> 
+                        {region==='' ? <input type="text" id="region" placeholder="Region" value={region} onChange={(e) => setRegion(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="region" placeholder="Region" value={region} onChange={(e) => setRegion(e.target.value)}/>}  
                     </label>
                 </div>
                 <div class="signup_input_container">
                     <label>
                         <span>Postcode</span>
-                        {last=='' ? <input type="text" id="postcode" placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)} style={{border: "1px solid red"}}/> 
+                        {postcode==='' ? <input type="text" id="postcode" placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="postcode" placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)}/>}  
                     </label>
                 </div>
                 <div class="signup_input_container">
                     <label>
                         <span>Country</span>
-                        {last=='' ? <input type="text" id="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} style={{border: "1px solid red"}}/> 
+                        {country==='' ? <input type="text" id="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)}/>}  
                     </label>
                 </div>

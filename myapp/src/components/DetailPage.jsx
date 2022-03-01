@@ -21,11 +21,12 @@ function DetailPage() {
     const [users, setUsers] = useState([]);
     const [destination, setDestination] = useState(0);
 
+    const current_user = JSON.parse(window.localStorage.getItem("user")).id;
+
     useEffect(() => {
         getUsers()
     },[])
 
-    // 나중에 2로 바까야대
     async function getUsers() {
         setUsers([]);
         const userCnt = await contract.methods.userCount().call();

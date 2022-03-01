@@ -17,6 +17,11 @@ h2, h5 {
     font-family: "SedgwickAve";
 }
 
+h2 {
+    color: tomato;
+    font-size: 2em;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -82,11 +87,6 @@ a {
     margin-top: 10%;
     display: flex;
     justify-content: center;
-}
-
-h2 {
-    color: tomato;
-    font-size: 2em;
 }
 
 .input_container {
@@ -217,4 +217,12 @@ h2 {
     background-color: #fce76f;
     border: none;
     border-radius: 5px;
+}
+
+.button_medicine {
+    height: 40px;
+    width: 150px;
+    background-color: #fce76f;
+    border-radius: 50px;
+    border: transparent;
 }

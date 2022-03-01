@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import BlockchainContext from "./Context";
 
 import './custom.css';
 function LoginPage(props){
 
-    const [state, setState] = useState('');
+    const [identity, setIdentity] = useState('');
+    const [id, setId] = useState('');
 
     const blockchainContext = useContext(BlockchainContext);
     const { web3, contract, account } = blockchainContext;
@@ -14,18 +14,20 @@ function LoginPage(props){
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("account changed")
         getUser()
     }, [account])
 
     const getUser = async() => {
         const user = await contract.methods.getUser().call({ from: account });
-        if(user.id!=0) setState(user.identity)
+        if(user.id!==0){
+            setIdentity(user.identity);
+            setId(user.id);
+        }
     }
 
     const handleClick = (e) => {
-        if(state!=0){
-            const userObj = { name: state };
+        if(id!==''){
+            const userObj = { id: id, identity:identity };
             window.localStorage.setItem("user", JSON.stringify(userObj));
             navigate("/")
         }else{
@@ -37,15 +39,15 @@ function LoginPage(props){
     }
 
     return(
-        <div class="outer_container">
-            <div class="login">
+        <div className="outer_container">
+            <div className="login">
                 <h2>Welcome to Medicine Tracker</h2>
                 
-                {state==0 ? 
-                    <div class = "submit">
+                {id==='' ? 
+                    <div className = "submit">
                         <input type="button" onClick={handleSignUp} value="SignUp"/>
                     </div> : 
-                    <div class = "submit">
+                    <div className = "submit">
                         <input type="button" onClick={handleClick} value="Login"/>
                     </div>
                 }
