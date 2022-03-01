@@ -1,50 +1,55 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import BlockchainContext from "./Context";
+
 import './custom.css';
 function LoginPage(props){
-    const [email,setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [identity, setIdentity] = React.useState('customer');
+
+    const [state, setState] = useState('');
+
+    const blockchainContext = useContext(BlockchainContext);
+    const { web3, contract, account } = blockchainContext;
+    
     const navigate = useNavigate();
 
-    const handleClick = (e) => {
-        navigate("/");
+    useEffect(() => {
+        console.log("account changed")
+        getUser()
+    }, [account])
+
+    const getUser = async() => {
+        const user = await contract.methods.getUser().call({ from: account });
+        if(user.id!=0) setState(user.identity)
     }
+
+    const handleClick = (e) => {
+        if(state!=0){
+            const userObj = { name: state };
+            window.localStorage.setItem("user", JSON.stringify(userObj));
+            navigate("/")
+        }else{
+            alert("User account does not exist")
+        }
+    }
+    const handleSignUp = (e) => {
+        navigate("/register")
+    }
+
     return(
         <div class="outer_container">
             <div class="login">
-                <h2>Login</h2>
-                <div class="input_container">
-                    <h5>Email</h5>
-                    <input type="email" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                </div>
-                <div class="input_container">
-                    <h5>Password</h5>
-                    <input type="password" id="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                </div>
-                <div class="input_container">
-                    <h5>Identity</h5>
-                    <select class="select_container" value={identity} onChange={(e) => setIdentity(e.target.value)}>
-                        <option selected value="customer">Customer</option>
-                        <option value="pharmacist">Pharmacist</option>
-                        <option value="manufacturer">Manufacturer</option>
-                    </select>
-                </div>
-                <div class="options">
-                    <div class = "sign_up">
-                        {/* <a href = "/register">Sign Up</a> */}
-                        <Link to="/register">Sign Up</Link>
+                <h2>Welcome to Medicine Tracker</h2>
+                
+                {state==0 ? 
+                    <div class = "submit">
+                        <input type="button" onClick={handleSignUp} value="SignUp"/>
+                    </div> : 
+                    <div class = "submit">
+                        <input type="button" onClick={handleClick} value="Login"/>
                     </div>
-                    <br/>
-                    <div class = "forget_pw">
-                        {/* <a href = "/">Forgot Password?</a> */}
-                        <Link to="/">Forgot password?</Link>
-                    </div>
-                </div>
-                <div class = "submit">
-                    <input type="button" onClick={handleClick} value="Login"/>
-                </div>
+                }
+                
             </div>
         </div>
     );

@@ -24,7 +24,7 @@ a {
 
 .login {
     width: 30%;
-    height: 700px;
+    height: 300px;
     background: white;
     border-radius: 20px;
     display: flex;
@@ -32,6 +32,19 @@ a {
     align-items: center;
     flex-direction: column;
 }
+
+.signup {
+    width: 30%;
+    height: 90%;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
 .outer_container {
     width: 100%;
     height: 100vh;
@@ -60,6 +73,11 @@ a {
     overflow-y: scroll;
 }
 
+.user_container{
+    margin: auto;
+    margin-top: 20px;
+    width: 80%;
+}
 .qr_container {
     margin-top: 10%;
     display: flex;
@@ -79,6 +97,35 @@ h2 {
 .input_container input {
     width: 100%;
     height: 50px;
+    border-radius: 30px;
+    padding: 0px 20px;
+    border: 1px solid lightgray;
+    outline: none;
+}
+
+.signup span {
+    display: inline-block;
+    width: 7em;
+}
+
+.signup_input_container {
+    margin-top: 15px;
+    width: 80%;
+}
+
+.signup_input_container input {
+    width: 20em;
+    height: 40px;
+    border-radius: 30px;
+    padding: 0px 20px;
+    border: 1px solid lightgray;
+    outline: none;
+
+}
+
+.signup_input_container select {
+    width: 20em;
+    height: 40px;
     border-radius: 30px;
     padding: 0px 20px;
     border: 1px solid lightgray;
@@ -164,4 +211,10 @@ h2 {
     border: none;
     border-radius: 50px;
     margin-top: 20px;
+}
+
+.button_confirm {
+    background-color: #fce76f;
+    border: none;
+    border-radius: 5px;
 }

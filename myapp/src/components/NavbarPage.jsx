@@ -11,7 +11,7 @@ function NavbarPage() {
                     <Nav>
                         <NavDropdown id="nav-dropdown-light-example" title="Accounts" menuVariant="light" >
                             <NavDropdown.Item><Link to="/scan" style={{textDecoration:"none", color:"black"}}>Scan</Link></NavDropdown.Item>
-                            <NavDropdown.Item><Link to="/" style={{textDecoration:"none", color:"black"}}>Something</Link></NavDropdown.Item>
+                            <NavDropdown.Item><Link to="/users" style={{textDecoration:"none", color:"black"}}>Users</Link></NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item><Link to="/login" style={{textDecoration:"none"}}>Logout</Link></NavDropdown.Item>
                         </NavDropdown>

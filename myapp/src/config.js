@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0xF9CA45cD31B52992eed2DcA3dae0B4A3973Fa50c'
+export const SUPPLY_CHAIN_ADDRESS = '0x3f8750F545d29599231c85274900d199d37E9838'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -39,7 +39,15 @@ export const SUPPLY_CHAIN_ABI = [
         "type": "string"
       },
       {
+        "name": "phone",
+        "type": "string"
+      },
+      {
         "name": "addr",
+        "type": "string"
+      },
+      {
+        "name": "abn",
         "type": "string"
       },
       {
@@ -171,6 +179,58 @@ export const SUPPLY_CHAIN_ABI = [
     "signature": "0xc85e766d"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "newUsers",
+    "outputs": [
+      {
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "company",
+        "type": "string"
+      },
+      {
+        "name": "phone",
+        "type": "string"
+      },
+      {
+        "name": "addr",
+        "type": "string"
+      },
+      {
+        "name": "abn",
+        "type": "string"
+      },
+      {
+        "name": "identity",
+        "type": "string"
+      },
+      {
+        "name": "state",
+        "type": "uint256"
+      },
+      {
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xf9ad75e7"
+  },
+  {
     "inputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -189,16 +249,35 @@ export const SUPPLY_CHAIN_ABI = [
         "type": "string"
       },
       {
+        "name": "_phone",
+        "type": "string"
+      },
+      {
         "name": "_addr",
+        "type": "string"
+      },
+      {
+        "name": "_abn",
         "type": "string"
       },
       {
         "name": "_identity",
         "type": "string"
-      },
+      }
+    ],
+    "name": "register",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x104ace02"
+  },
+  {
+    "constant": false,
+    "inputs": [
       {
-        "name": "_address",
-        "type": "address"
+        "name": "_id",
+        "type": "uint256"
       }
     ],
     "name": "addUser",
@@ -206,7 +285,105 @@ export const SUPPLY_CHAIN_ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0xdbbed8ad"
+    "signature": "0xe1d81736"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "newRegistration",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "company",
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "type": "string"
+          },
+          {
+            "name": "addr",
+            "type": "string"
+          },
+          {
+            "name": "abn",
+            "type": "string"
+          },
+          {
+            "name": "identity",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "uint256"
+          },
+          {
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xe16a7ae1"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getUser",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "company",
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "type": "string"
+          },
+          {
+            "name": "addr",
+            "type": "string"
+          },
+          {
+            "name": "abn",
+            "type": "string"
+          },
+          {
+            "name": "identity",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x832880e7"
   },
   {
     "constant": false,

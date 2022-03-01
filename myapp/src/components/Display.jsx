@@ -25,7 +25,7 @@ function Display(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {displayMedicines(medicines)}
+                    {displayMedicines()}
                 </tbody>
             </Table>
         </div>
