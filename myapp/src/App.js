@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route  } from "react-router-dom";
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 import RegisterPage from './components/RegisterPage';
@@ -26,12 +26,25 @@ function App() {
         setContract(supplychain);
     }
     loadBlockchainData();
-}, []);
+  }, []);
+
+  useEffect(() => {
+    async function listenMMAccount() {
+      window.ethereum.on("accountsChanged", async function() {
+        // Time to reload your interface with accounts[0]!
+        const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+        const accounts = await web3.eth.getAccounts();
+        // accounts = await web3.eth.getAccounts();
+        setAccount(accounts[0]);
+        window.location.href = 'http://127.0.0.1:3000/login';
+      });
+    }
+    listenMMAccount();
+  }, []);
+
   if (web3==null || account==null || contract==null){
     return(
-      <div className="home_container">
-        <div className="home">
-        </div>
+      <div className="outer_container">
       </div>
     )
   }

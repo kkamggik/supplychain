@@ -33,7 +33,7 @@ function HomePage() {
             <div className="home">
                 <NavbarPage />
                 <div className="display">
-                    <button class="button_medicine" onClick={handleShow}>Add Medicine</button>
+                    <button className="button_medicine" onClick={handleShow}>Add Medicine</button>
                     <Search />
                     <Display medicines={medicines} />
                 </div>
