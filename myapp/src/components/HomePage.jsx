@@ -8,7 +8,7 @@ import MedicineModal from './MedicineModal';
 function HomePage() {
 
     const [show, setShow] = useState(false);
-    
+
     const blockchainContext = useContext(BlockchainContext);
     const { web3, contract, account } = blockchainContext;
 
@@ -37,8 +37,7 @@ function HomePage() {
                     <Search />
                     <Display medicines={medicines} />
                 </div>
-                <MedicineModal show={show} handleClose={handleClose} getMedicines={getMedicines}/>
-                
+                <MedicineModal show={show} handleClose={handleClose} getMedicines={getMedicines} />
             </div>
         </div>
     );

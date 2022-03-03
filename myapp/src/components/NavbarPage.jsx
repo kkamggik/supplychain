@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function NavbarPage() {
     return(
-        <Navbar expand="lg" style={{backgroundColor:"rgba(255, 0, 0, 0.1)"}}>
+        <Navbar expand="lg" style={{borderBottom: "solid 1px lightgray"}}>
             <Container fluid>
                 <Navbar.Brand><Link to="/" style={{textDecoration:"none", color:"black"}}>Medicine Tracker</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbar-light-example" />

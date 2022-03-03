@@ -45,6 +45,7 @@ function App() {
   if (web3==null || account==null || contract==null){
     return(
       <div className="outer_container">
+        connecting...
       </div>
     )
   }
