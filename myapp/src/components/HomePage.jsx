@@ -13,6 +13,7 @@ function HomePage() {
     const { web3, contract, account } = blockchainContext;
 
     const [medicines, setMedicines] = useState([]);
+    const identity = JSON.parse(window.localStorage.getItem("user")).identity;
 
     useEffect(() => {
         getMedicines()
@@ -33,7 +34,7 @@ function HomePage() {
             <div className="home">
                 <NavbarPage />
                 <div className="display">
-                    <button className="button_medicine" onClick={handleShow}>Add Medicine</button>
+                    {identity==="2" ? <button className="button_medicine" onClick={handleShow}>Add Medicine</button> : "" }
                     <Search />
                     <Display medicines={medicines} />
                 </div>

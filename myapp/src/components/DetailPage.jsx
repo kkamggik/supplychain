@@ -66,7 +66,7 @@ function DetailPage() {
         <div className="outer_container">
             <div className="home">
                 <NavbarPage />
-                <Card className="text-center" style={{marginTop: 50}}>
+                <Card className="text-center" style={{marginTop: 50, border: "none"}}>
                     <Card.Img variant="top" src={url} style={{width: 200, height: 200, margin: "auto", marginTop:20}}/>
                     <Card.Body>
                         <Card.Title>{medicine.name}</Card.Title>
@@ -81,8 +81,10 @@ function DetailPage() {
                     </Card.Body>
                 </Card>
                 <div className="button_container">
-                    <button className="button_remove" onClick={handleRemove}>Discard</button>
-                    <button className="button_ship" onClick={handleShow}>Ship</button>
+                    {medicine.holder === current_user ? <button className="button_remove" onClick={handleRemove}>Discard</button> 
+                    : <button className="button_remove" onClick={handleRemove} disabled>Discard</button>}
+                    {medicine.holder === current_user ? <button className="button_ship" onClick={handleShow}>Ship</button>
+                    : <button className="button_ship" onClick={handleShow} disabled>Ship</button> }
                     <button className="button_receive" onClick={handleReceive}>Receive</button>
                 </div>
             </div>
