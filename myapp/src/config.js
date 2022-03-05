@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0x9E7222b9A7F5eFacE405a110f09623B22d452731'
+export const SUPPLY_CHAIN_ADDRESS = '0xE6Af3599EE9cE51AA149986C9C084BF9dD24370b'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -104,6 +104,10 @@ export const SUPPLY_CHAIN_ABI = [
       {
         "name": "time",
         "type": "string"
+      },
+      {
+        "name": "state",
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -548,6 +552,64 @@ export const SUPPLY_CHAIN_ABI = [
     "signature": "0x5904fb33"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getMedicineOnTransit",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "serial",
+            "type": "string"
+          },
+          {
+            "name": "holder",
+            "type": "uint256"
+          },
+          {
+            "name": "manufacturer",
+            "type": "uint256"
+          },
+          {
+            "name": "directions",
+            "type": "string"
+          },
+          {
+            "name": "mDate",
+            "type": "string"
+          },
+          {
+            "name": "eDate",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xd0028aa6"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -576,6 +638,10 @@ export const SUPPLY_CHAIN_ABI = [
       {
         "name": "_medicine",
         "type": "uint256"
+      },
+      {
+        "name": "time",
+        "type": "string"
       }
     ],
     "name": "receive",
@@ -583,6 +649,6 @@ export const SUPPLY_CHAIN_ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0xcba2534f"
+    "signature": "0xa4e77870"
   }
 ]

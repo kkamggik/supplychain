@@ -27,6 +27,13 @@ function DetailPage() {
         getUsers()
     },[])
 
+    useEffect(() => {
+        async function getTransaction(){
+            const transaction = await contract.methods.transactions(3).call();
+            console.log(transaction)
+        }
+        getTransaction();
+    },[])
     async function getUsers() {
         setUsers([]);
         const userCnt = await contract.methods.userCount().call();
@@ -48,7 +55,8 @@ function DetailPage() {
 
     const handleShip = (e) => {
         console.log("ship medicine");
-        contract.methods.send(destination, medicine.id).send({ from: account })
+        const time = new Date().toUTCString()
+        contract.methods.send(destination, medicine.id, time).send({ from: account })
             .once('receipt', (receipt) => {
             navigate("/");
         })
@@ -56,7 +64,8 @@ function DetailPage() {
     
     const handleReceive = (e) => {
         console.log("receive medicine");
-        contract.methods.receive(medicine.id).send({ from: account })
+        const time = new Date().toUTCString()
+        contract.methods.receive(medicine.id, time).send({ from: account })
             .once('receipt', (receipt) => {
             navigate("/");
         })
@@ -72,7 +81,7 @@ function DetailPage() {
                         <Card.Title>{medicine.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{medicine.serial}</Card.Subtitle>
                         <Card.Text>
-                            <div>Manufacturer: {medicine.mName}</div>
+                            <div>Manufacturer: {medicine.manufacturer}</div>
                             <div>Manufactured Date: {medicine.mDate}</div>
                             <div>Expiry Date: {medicine.eDate}</div>
                             <div>Directions:</div>
@@ -81,9 +90,9 @@ function DetailPage() {
                     </Card.Body>
                 </Card>
                 <div className="button_container">
-                    {medicine.holder === current_user ? <button className="button_remove" onClick={handleRemove}>Discard</button> 
+                    {medicine.holder === current_user && medicine.state==1 ? <button className="button_remove" onClick={handleRemove}>Discard</button> 
                     : <button className="button_remove" onClick={handleRemove} disabled>Discard</button>}
-                    {medicine.holder === current_user ? <button className="button_ship" onClick={handleShow}>Ship</button>
+                    {medicine.holder === current_user && medicine.state==1 ? <button className="button_ship" onClick={handleShow}>Ship</button>
                     : <button className="button_ship" onClick={handleShow} disabled>Ship</button> }
                     <button className="button_receive" onClick={handleReceive}>Receive</button>
                 </div>

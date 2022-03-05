@@ -76,7 +76,8 @@ a {
 .medicine_container {
     margin-top: 15px;
     height: 75vh;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+    overflow-y: auto;
 }
 
 .user_container{

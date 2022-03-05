@@ -6,6 +6,7 @@ import RegisterPage from './components/RegisterPage';
 import Medicine from './components/DetailPage';
 import Scan from './components/ScanPage';
 import UserRegister from './components/UserPage';
+import TransitPage from './components/TransitPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlockchainContext from "./components/Context";
 import Web3 from 'web3/dist/web3.min.js';
@@ -59,6 +60,7 @@ function App() {
         <Route path="/medicine" element={<Medicine/>} />
         <Route path="/scan" element={<Scan/>} />
         <Route path="/users" element={<UserRegister/>} />
+        <Route path="/transit" element={<TransitPage/>} />
       </Routes>
     </BrowserRouter>
     </BlockchainContext.Provider> 
