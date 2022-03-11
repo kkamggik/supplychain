@@ -24,11 +24,11 @@ function TransitPage(props) {
     }
     
     return (
-        <div className="outer_container">
-            <div className="home">
-                <NavbarPage/>
+        <div className="container_outer">
+            <NavbarPage/>
+            <div className="main">
                 <div className="user_container">
-                    <h3>Medicines in transit</h3>
+                    <h2>Medicines in transit</h2>
                     <br/>
                     <InTransit medicines={medicines}/>
                 </div>

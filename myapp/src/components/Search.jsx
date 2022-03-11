@@ -6,17 +6,6 @@ function Search(props) {
     const [keyword, setKeyword] = useState('');    
 
     const handleSort = (e) => {
-        // let filtered;
-        // if(keyword==='') filtered = medicines;
-        // else if(sort==="medicineName"){
-        //     filtered = medicines.filter((medicine) => medicine.name===keyword);
-        // }else if(sort==="serialNumber"){
-        //     filtered = medicines.filter((medicine) => medicine.medicine_serial===keyword);
-        // }else if(sort==="id"){
-        //     filtered = medicines.filter((medicine) => medicine.id===keyword);
-        // }
-        // displayMedicines();
-        // e.preventDefault();
     }
 
     return (

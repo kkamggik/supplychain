@@ -22,11 +22,11 @@ function UserPage() {
     }
 
     return (
-        <div className="outer_container">
-            <div className="home">
-                <NavbarPage />
+        <div className="container_outer">
+            <NavbarPage />
+            <div className="main">
                 <div className="user_container">
-                    <h3>Manage Users</h3>
+                    <h2>Manage Users</h2>
                     <br/>
                     <User users={users} getNewUsers={getNewUsers}/>
                 </div>

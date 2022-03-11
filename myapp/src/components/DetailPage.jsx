@@ -1,4 +1,4 @@
-import { React, useContext, useState, useEffect} from "react";
+import { React, useContext, useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom'
 import NavbarPage from './NavbarPage';
 import { Card, Form, Row, Col, Button, Modal, Table } from 'react-bootstrap';
@@ -12,7 +12,7 @@ function DetailPage() {
     const { medicine } = location.state;
 
     const blockchainContext = useContext(BlockchainContext);
-    const {web3, contract, account} = blockchainContext;
+    const { web3, contract, account } = blockchainContext;
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -25,32 +25,32 @@ function DetailPage() {
 
     useEffect(() => {
         getUsers()
-    },[])
+    }, [])
 
     useEffect(() => {
-        async function getTransaction(){
+        async function getTransaction() {
             const transaction = await contract.methods.transactions(3).call();
             console.log(transaction)
         }
         getTransaction();
-    },[])
+    }, [])
     async function getUsers() {
         setUsers([]);
         const userCnt = await contract.methods.userCount().call();
         for (let i = 1; i <= userCnt; i++) {
             const user = await contract.methods.users(i).call();
-            if(user.identity==="2" || user.identity==="3") setUsers(users => [...users, user])
+            if (user.identity === "2" || user.identity === "3") setUsers(users => [...users, user])
         }
     }
 
-    const url = "https://api.qrserver.com/v1/create-qr-code/?data="+medicine.serial;
+    const url = "https://api.qrserver.com/v1/create-qr-code/?data=" + medicine.serial;
 
     const handleRemove = (e) => {
         console.log(`remove medicine #${medicine.id}`);
         contract.methods.removeMedicine(medicine.id).send({ from: account })
             .once('receipt', (receipt) => {
-            navigate("/");
-        })
+                navigate("/");
+            })
     }
 
     const handleShip = (e) => {
@@ -58,69 +58,71 @@ function DetailPage() {
         const time = new Date().toUTCString()
         contract.methods.send(destination, medicine.id, time).send({ from: account })
             .once('receipt', (receipt) => {
-            navigate("/");
-        })
+                navigate("/");
+            })
     }
-    
+
     const handleReceive = (e) => {
         console.log("receive medicine");
         const time = new Date().toUTCString()
         contract.methods.receive(medicine.id, time).send({ from: account })
             .once('receipt', (receipt) => {
-            navigate("/");
-        })
+                navigate("/");
+            })
     }
 
     return (
-        <div className="outer_container">
-            <div className="home">
-                <NavbarPage />
-                <Card className="text-center" style={{marginTop: 50, border: "none"}}>
-                    <Card.Img variant="top" src={url} style={{width: 200, height: 200, margin: "auto", marginTop:20}}/>
-                    <Card.Body>
-                        <Card.Title>{medicine.name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">{medicine.serial}</Card.Subtitle>
-                        <Card.Text>
-                            <div>Manufacturer: {medicine.manufacturer}</div>
-                            <div>Manufactured Date: {medicine.mDate}</div>
-                            <div>Expiry Date: {medicine.eDate}</div>
-                            <div>Directions:</div>
-                            <div style={{whiteSpace: "pre-wrap"}}>{medicine.directions}</div>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-                <div className="button_container">
-                    {medicine.holder === current_user && medicine.state==1 ? <button className="button_remove" onClick={handleRemove}>Discard</button> 
-                    : <button className="button_remove" onClick={handleRemove} disabled>Discard</button>}
-                    {medicine.holder === current_user && medicine.state==1 ? <button className="button_ship" onClick={handleShow}>Ship</button>
-                    : <button className="button_ship" onClick={handleShow} disabled>Ship</button> }
-                    <button className="button_receive" onClick={handleReceive}>Receive</button>
+        <div className="container_outer">
+            <NavbarPage />
+            <div className="main">
+                <div>
+                    <Card className="text-center" style={{ marginTop: "50px", border: "none" }}>
+                        <Card.Img variant="top" src={url} style={{ width: 200, height: 200, margin: "auto", marginTop: 20 }} />
+                        <Card.Body>
+                            <Card.Title>{medicine.name}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{medicine.serial}</Card.Subtitle>
+                            <Card.Text>
+                                <div>Manufacturer: {medicine.manufacturer}</div>
+                                <div>Manufactured Date: {medicine.mDate}</div>
+                                <div>Expiry Date: {medicine.eDate}</div>
+                                <div>Directions:</div>
+                                <div style={{ whiteSpace: "pre-wrap" }}>{medicine.directions}</div>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <div className="button_container">
+                        {medicine.holder === current_user && medicine.state == 1 ? <button className="button_remove" onClick={handleRemove}>Discard</button>
+                            : <button className="button_remove" onClick={handleRemove} disabled>Discard</button>}
+                        {medicine.holder === current_user && medicine.state == 1 ? <button className="button_ship" onClick={handleShow}>Ship</button>
+                            : <button className="button_ship" onClick={handleShow} disabled>Ship</button>}
+                        <button className="button_receive" onClick={handleReceive}>Receive</button>
+                    </div>
                 </div>
             </div>
             <Modal show={show} onHide={handleClose} backdrop="static">
-                    <Modal.Header closeButton>
-                        <Modal.Title>Ship Medicine</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="direction">
-                                <Form.Label>Shipping Addresses</Form.Label>
-                                <Form.Select onChange={(e) => setDestination(e.target.value)}>
-                                    <option value="0"> Select destination</option>
-                                    {users.map(user => {
-                                        return (
-                                            <option value={user.id}>{user.company} ({user.addr})</option>
-                                        )
-                                    })}
-                                </Form.Select>
-                            </Form.Group>
-                        </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>Close</Button>
-                        <Button variant="primary" onClick={handleShip}>Submit</Button>
-                    </Modal.Footer>
-                </Modal>
+                <Modal.Header closeButton>
+                    <Modal.Title>Ship Medicine</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="direction">
+                            <Form.Label>Shipping Addresses</Form.Label>
+                            <Form.Select onChange={(e) => setDestination(e.target.value)}>
+                                <option value="0"> Select destination</option>
+                                {users.map(user => {
+                                    return (
+                                        <option value={user.id}>{user.company} ({user.addr})</option>
+                                    )
+                                })}
+                            </Form.Select>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>Close</Button>
+                    <Button variant="primary" onClick={handleShip}>Submit</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

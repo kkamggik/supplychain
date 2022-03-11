@@ -39,9 +39,10 @@ function ScanPage() {
     }
 
     return (
-        <div className="outer_container">
-            <div className="home">
-                <NavbarPage />
+        <div className="container_outer">
+            <NavbarPage />
+            <div className="main">
+
                 <div className="display" style={{display:"flex", flexDirection: "column", alignItems: "center", marginTop:"20em"}}>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
                     <input name="file" type="file" onChange={handleFileSelect} style={{marginLeft:"8em"}}/>

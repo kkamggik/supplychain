@@ -1,29 +1,38 @@
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CgPill } from "react-icons/cg";
+import { AiOutlineMedicineBox, AiOutlineUser } from "react-icons/ai";
+import {FiSettings, FiLogOut} from "react-icons/fi";
+import {MdOutlineLocalShipping, MdOutlineQrCodeScanner} from 'react-icons/md';
+import {BsHouseDoor} from 'react-icons/bs';
 
 
 function NavbarPage() {
     const current_user = JSON.parse(window.localStorage.getItem("user")).identity;
     return(
-        <Navbar expand="lg" style={{borderBottom: "solid 1px lightgray"}}>
-            <Container fluid>
-                <Navbar.Brand><Link to="/" style={{textDecoration:"none", color:"tomato"}}>Medicine Tracker<CgPill/></Link></Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbar-light-example" />
-                <Navbar.Collapse id="navbar-light-example">
-                    <Nav>
-                        <Nav.Link><Link to="/scan" style={{textDecoration:"none", color:"black"}}>Scan</Link></Nav.Link>
-                        <Nav.Link><Link to="/transit" style={{textDecoration:"none", color:"black"}}>In Transit</Link></Nav.Link>
-                        <NavDropdown id="nav-dropdown-light-example" title="Accounts" menuVariant="light">
-                        <NavDropdown.Item><Link to="/users" style={{textDecoration:"none", color:"black"}}>Profile</Link></NavDropdown.Item>
-                        {current_user === "1" ? <NavDropdown.Item><Link to="/users" style={{textDecoration:"none", color:"black"}}>Users</Link></NavDropdown.Item> : ""}
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item><Link to="/login" style={{textDecoration:"none"}}>Logout</Link></NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <div className="custom_nav">
+            <ul>
+                <li>
+                    <Link to="/"><span className="icon"><AiOutlineMedicineBox/></span><span className="title">Medicine Tracker</span></Link>
+                </li>
+                <li>
+                    <Link to="/"><span className="icon"><BsHouseDoor/></span><span className="title">Dashboard</span></Link>
+                </li>
+                <li>
+                    <Link to="/scan"><span className="icon"><MdOutlineQrCodeScanner/></span><span className="title">Scan</span></Link>
+                </li>
+                <li>
+                    <Link to="/transit"><span className="icon"><MdOutlineLocalShipping/></span><span className="title">In Transit</span></Link>
+                </li>
+                <li>
+                    <Link to="/users"><span className="icon"><AiOutlineUser/></span><span className="title">Users</span></Link>
+                </li>
+                <li>
+                    <Link to="/settings"><span className="icon"><FiSettings/></span><span className="title">Settings</span></Link>
+                </li>
+                <li>
+                    <Link to="/login"><span className="icon"><FiLogOut/></span><span className="title">Sign Out</span></Link>
+                </li>
+            </ul>
+        </div>
     );
 }
 export default NavbarPage;

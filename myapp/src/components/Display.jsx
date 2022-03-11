@@ -10,25 +10,29 @@ function Display(props) {
                     <td>{medicine.id}</td>
                     <td>{medicine.name}</td>
                     <td><Link to="/medicine" state={{ medicine: medicine }}> {medicine.serial}</Link></td>
+                    {medicine.state==="1" ? <td><span class="status">In Stock</span></td> : null}
+                    {medicine.state==="2" ? <td><span class="status">In Progress</span></td> : null}
+                    {medicine.state==="3" ? <td><span class="status">Delivered</span></td> : null}
                 </tr>
             )
         })
     }
     return (
-        <div className="medicine_container">
+        // <div className="medicine_container">
             <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Medicine Name</th>
                         <th>Serial Number</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {displayMedicines()}
                 </tbody>
             </Table>
-        </div>
+        // </div>
     );
 }
 export default Display;

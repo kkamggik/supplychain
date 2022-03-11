@@ -19,7 +19,6 @@ function LoginPage(props){
 
     const getUser = async() => {
         const user = await contract.methods.getUser().call({ from: account });
-        console.log(user)
         if(user.id!=="0"){
             setIdentity(user.identity);
             setId(user.id);
@@ -43,10 +42,9 @@ function LoginPage(props){
     }
 
     return(
-        <div className="outer_container">
+        <div className="container_outer">
             <div className="login">
                 <h2>Welcome to Medicine Tracker</h2>
-                {console.log(id)}
                 {id==='' ? 
                     <div className = "submit">
                         <input type="button" onClick={handleSignUp} value="SignUp"/>

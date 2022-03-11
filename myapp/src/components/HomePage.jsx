@@ -4,6 +4,9 @@ import BlockchainContext from "./Context";
 import Display from './Display';
 import Search from './Search';
 import MedicineModal from './MedicineModal';
+import { Link } from 'react-router-dom';
+import { CgPill } from "react-icons/cg";
+
 
 function HomePage() {
 
@@ -30,17 +33,18 @@ function HomePage() {
     const handleClose = () => setShow(false);
 
     return (
-        <div className="outer_container">
-            <div className="home">
-                <NavbarPage />
-                <div className="display">
-                    {identity==="2" ? <button className="button_medicine" onClick={handleShow}>Add Medicine</button> : "" }
-                    <Search />
-                    <Display medicines={medicines} />
+        <div className="container_outer">
+            <NavbarPage />
+                <div className="main">
+                    <div className="box">
+                        {identity==="2" ? <button className="button_medicine" onClick={handleShow}>Add Medicine</button> : "" }
+                        <Search/>
+                        <Display medicines={medicines} />
+                    </div>
                 </div>
                 <MedicineModal show={show} handleClose={handleClose} getMedicines={getMedicines} />
-            </div>
         </div>
+ 
     );
 }
 export default HomePage;
