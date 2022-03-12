@@ -42,7 +42,7 @@ function LoginPage(props){
     }
 
     return(
-        <div className="container_outer">
+        <div className="container_home">
             <div className="login">
                 <h2>Welcome to Medicine Tracker</h2>
                 {id==='' ? 

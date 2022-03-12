@@ -33,70 +33,60 @@ function RegisterPage(props){
         }
     }
     return(
-        <div class="container_outer">
+        <div class="container_home">
             <div class="signup">
                 <h2>Register</h2>
-                <div className="signup_input_container">
+                <div className="setting_input">
                     <label>
                         <span>First Name</span>
                         {first==='' ? <input type="text" id="first" placeholder="First Name" value={first} onChange={(e) => setFirst(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="first" placeholder="First Name" value={first} onChange={(e) => setFirst(e.target.value)}/>}  
                     </label>
-                </div>
-                <div className="signup_input_container">
                     <label>
                         <span>Last Name</span>
                         {last==='' ? <input type="text" id="last" placeholder="Last Name" value={last} onChange={(e) => setLast(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="last" placeholder="Last Name" value={last} onChange={(e) => setLast(e.target.value)}/>}  
                     </label>
                 </div>
-                <div className="signup_input_container">
+                <div className="setting_input">
                     <label>
                         <span>Phone</span>
                         <input type="tel" id="phone" placeholder="111-222-3333" value={phone} onChange={(e) => setPhone(e.target.value)}/>
                     </label>
-                </div>
-                <div className="signup_input_container">
                     <label>
                         <span>Company</span>
                         <input type="text" id="company" placeholder="Company" value={company} onChange={(e) => setCompany(e.target.value)}/>
                     </label>
                 </div>
-                <div className="signup_input_container">
+                <div className="setting_input">
                     <label>
                         <span>Address</span>
                         {address==='' ? <input type="text" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} style={{border: "1px solid red"}}/>
                         : <input type="text" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)}/>}  
                     </label>
-                </div>
-                <div className="signup_input_container">
                     <label>
                         <span>Region</span>
                         {region==='' ? <input type="text" id="region" placeholder="Region" value={region} onChange={(e) => setRegion(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="region" placeholder="Region" value={region} onChange={(e) => setRegion(e.target.value)}/>}  
                     </label>
                 </div>
-                <div className="signup_input_container">
+                <div className="setting_input">
                     <label>
                         <span>Postcode</span>
                         {postcode==='' ? <input type="text" id="postcode" placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="postcode" placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)}/>}  
                     </label>
-                </div>
-                <div className="signup_input_container">
                     <label>
                         <span>Country</span>
                         {country==='' ? <input type="text" id="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} style={{border: "1px solid red"}}/> 
                         : <input type="text" id="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)}/>}  
                     </label>
                 </div>
-                <div className="signup_input_container">
+                <div className="setting_input">
                     <label>
                         <span>ABN</span>
                         <input type="text" id="abn" placeholder="Australian Business Number" value={ABN} onChange={(e) => setABN(e.target.value)}/>
                     </label>
-                </div>
-                <div className="signup_input_container">
                     <label>
                         <span>Identity</span>
                         <select className="select_container" value={identity} onChange={(e) => setIdentity(e.target.value)}>
