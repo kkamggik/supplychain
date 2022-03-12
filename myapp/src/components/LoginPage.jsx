@@ -7,6 +7,7 @@ function LoginPage(props){
 
     const [identity, setIdentity] = useState('');
     const [id, setId] = useState('');
+    const [status, setStatus] = useState('');
 
     const blockchainContext = useContext(BlockchainContext);
     const { web3, contract, account } = blockchainContext;
@@ -22,9 +23,11 @@ function LoginPage(props){
         if(user.id!=="0"){
             setIdentity(user.identity);
             setId(user.id);
+            setStatus(user.state);
         }else{
             setIdentity('');
             setId('');
+            setStatus('');
         }
     }
 
@@ -45,15 +48,9 @@ function LoginPage(props){
         <div className="container_home">
             <div className="login">
                 <h2>Welcome to Medicine Tracker</h2>
-                {id==='' ? 
-                    <div className = "submit">
-                        <input type="button" onClick={handleSignUp} value="SignUp"/>
-                    </div> : 
-                    <div className = "submit">
-                        <input type="button" onClick={handleClick} value="Login"/>
-                    </div>
-                }
-                
+                {status==='' ?  <div className = "submit"><input type="button" onClick={handleSignUp} value="SignUp"/></div> : null }
+                {status==='1' ? <div className = "submit"><input type="button" onClick={handleClick} value="Login"/></div> : null }
+                {status==='0' ? <h3>Registration in progress</h3> : null }
             </div>
         </div>
     );

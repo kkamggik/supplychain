@@ -1,6 +1,7 @@
 import { React, useContext, useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom'
 import NavbarPage from './NavbarPage';
+import Transaction from './Transaction';
 import { Card, Form, Row, Col, Button, Modal, Table } from 'react-bootstrap';
 import BlockchainContext from "./Context";
 
@@ -20,6 +21,7 @@ function DetailPage() {
 
     const [users, setUsers] = useState([]);
     const [destination, setDestination] = useState(0);
+    const [transactions, setTransactions] = useState([]);
 
     const current_user = JSON.parse(window.localStorage.getItem("user")).id;
 
@@ -29,8 +31,8 @@ function DetailPage() {
 
     useEffect(() => {
         async function getTransaction() {
-            const transaction = await contract.methods.transactions(3).call();
-            console.log(transaction)
+            const transaction = await contract.methods.getTransactions(medicine.id).call();
+            setTransactions(transaction);
         }
         getTransaction();
     }, [])
@@ -47,7 +49,8 @@ function DetailPage() {
 
     const handleRemove = (e) => {
         console.log(`remove medicine #${medicine.id}`);
-        contract.methods.removeMedicine(medicine.id).send({ from: account })
+        const time = new Date().toUTCString();
+        contract.methods.removeMedicine(medicine.id, time).send({ from: account })
             .once('receipt', (receipt) => {
                 navigate("/");
             })
@@ -87,6 +90,8 @@ function DetailPage() {
                                 <div>Expiry Date: {medicine.eDate}</div>
                                 <div>Directions:</div>
                                 <div style={{ whiteSpace: "pre-wrap" }}>{medicine.directions}</div>
+                                <br/>
+                                <Transaction transactions={transactions}/>
                             </Card.Text>
                         </Card.Body>
                     </Card>

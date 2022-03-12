@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0xE6Af3599EE9cE51AA149986C9C084BF9dD24370b'
+export const SUPPLY_CHAIN_ADDRESS = '0x5750ea68054495a22F8779d9e45C35f8A1a4a273'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -52,6 +52,10 @@ export const SUPPLY_CHAIN_ABI = [
       },
       {
         "name": "identity",
+        "type": "uint256"
+      },
+      {
+        "name": "state",
         "type": "uint256"
       }
     ],
@@ -158,7 +162,7 @@ export const SUPPLY_CHAIN_ABI = [
       },
       {
         "name": "manufacturer",
-        "type": "uint256"
+        "type": "string"
       },
       {
         "name": "directions",
@@ -181,58 +185,6 @@ export const SUPPLY_CHAIN_ABI = [
     "stateMutability": "view",
     "type": "function",
     "signature": "0xc85e766d"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "newUsers",
-    "outputs": [
-      {
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "company",
-        "type": "string"
-      },
-      {
-        "name": "phone",
-        "type": "string"
-      },
-      {
-        "name": "addr",
-        "type": "string"
-      },
-      {
-        "name": "abn",
-        "type": "string"
-      },
-      {
-        "name": "identity",
-        "type": "string"
-      },
-      {
-        "name": "state",
-        "type": "uint256"
-      },
-      {
-        "name": "account",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xf9ad75e7"
   },
   {
     "inputs": [],
@@ -324,15 +276,11 @@ export const SUPPLY_CHAIN_ABI = [
           },
           {
             "name": "identity",
-            "type": "string"
+            "type": "uint256"
           },
           {
             "name": "state",
             "type": "uint256"
-          },
-          {
-            "name": "account",
-            "type": "address"
           }
         ],
         "name": "",
@@ -377,6 +325,10 @@ export const SUPPLY_CHAIN_ABI = [
           },
           {
             "name": "identity",
+            "type": "uint256"
+          },
+          {
+            "name": "state",
             "type": "uint256"
           }
         ],
@@ -426,6 +378,10 @@ export const SUPPLY_CHAIN_ABI = [
       {
         "name": "medicineId",
         "type": "uint256"
+      },
+      {
+        "name": "_date",
+        "type": "string"
       }
     ],
     "name": "removeMedicine",
@@ -433,7 +389,7 @@ export const SUPPLY_CHAIN_ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0x9bfff076"
+    "signature": "0xf0ab4624"
   },
   {
     "constant": true,
@@ -465,7 +421,7 @@ export const SUPPLY_CHAIN_ABI = [
           },
           {
             "name": "manufacturer",
-            "type": "uint256"
+            "type": "string"
           },
           {
             "name": "directions",
@@ -523,7 +479,7 @@ export const SUPPLY_CHAIN_ABI = [
           },
           {
             "name": "manufacturer",
-            "type": "uint256"
+            "type": "string"
           },
           {
             "name": "directions",
@@ -581,7 +537,7 @@ export const SUPPLY_CHAIN_ABI = [
           },
           {
             "name": "manufacturer",
-            "type": "uint256"
+            "type": "string"
           },
           {
             "name": "directions",
@@ -650,5 +606,51 @@ export const SUPPLY_CHAIN_ABI = [
     "stateMutability": "nonpayable",
     "type": "function",
     "signature": "0xa4e77870"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_medicine",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTransactions",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "medicine_id",
+            "type": "uint256"
+          },
+          {
+            "name": "from",
+            "type": "uint256"
+          },
+          {
+            "name": "to",
+            "type": "uint256"
+          },
+          {
+            "name": "time",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x5742177c"
   }
 ]
