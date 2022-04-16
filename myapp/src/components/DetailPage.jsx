@@ -98,7 +98,7 @@ function DetailPage() {
                     <div className="button_container">
                         {medicine.holder === current_user && medicine.state == 1 ? <button className="button_remove" onClick={handleRemove}>Discard</button>
                             : <button className="button_remove" onClick={handleRemove} disabled>Discard</button>}
-                        {medicine.holder === current_user && medicine.state == 1 ? <button className="button_ship" onClick={handleShow}>Ship</button>
+                        {medicine.holder === current_user && medicine.state == 1 ? <button className="button_ship" onClick={handleShow}>Send</button>
                             : <button className="button_ship" onClick={handleShow} disabled>Ship</button>}
                         <button className="button_receive" onClick={handleReceive}>Receive</button>
                     </div>

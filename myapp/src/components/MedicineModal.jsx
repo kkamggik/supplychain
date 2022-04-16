@@ -28,7 +28,8 @@ function MedicineModal(props) {
         handleClose();
         var serial = generator.generate(16);
         setSerialNumber(serial);
-        contract.methods.addMedicine(medicineName, serial, direction, startDate, endDate).send({ from: account })
+        const time = new Date().toUTCString();
+        contract.methods.addMedicine(medicineName, serial, direction, startDate, endDate, time).send({ from: account })
             .once('receipt', (receipt) => {
                 handleQRShow();
                 getMedicines();

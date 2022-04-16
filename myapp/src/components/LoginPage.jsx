@@ -49,7 +49,7 @@ function LoginPage(props){
             <div className="login">
                 <h2>Welcome to Medicine Tracker</h2>
                 {status==='' ?  <div className = "submit"><input type="button" onClick={handleSignUp} value="SignUp"/></div> : null }
-                {status==='1' ? <div className = "submit"><input type="button" onClick={handleClick} value="Login"/></div> : null }
+                {status==='1' ? <div className = "submit"><input type="button" onClick={handleClick} value="Go to website"/></div> : null }
                 {status==='0' ? <h3>Registration in progress</h3> : null }
             </div>
         </div>

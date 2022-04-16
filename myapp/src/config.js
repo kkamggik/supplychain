@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0x5750ea68054495a22F8779d9e45C35f8A1a4a273'
+export const SUPPLY_CHAIN_ADDRESS = '0x5143C060D0e0B1ECfB77dC12a7bFef660D280bb2'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -363,6 +363,10 @@ export const SUPPLY_CHAIN_ABI = [
       {
         "name": "_eDate",
         "type": "string"
+      },
+      {
+        "name": "_time",
+        "type": "string"
       }
     ],
     "name": "addMedicine",
@@ -370,7 +374,7 @@ export const SUPPLY_CHAIN_ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0x7bae75b5"
+    "signature": "0x32a486d8"
   },
   {
     "constant": false,
@@ -620,20 +624,12 @@ export const SUPPLY_CHAIN_ABI = [
       {
         "components": [
           {
-            "name": "id",
-            "type": "uint256"
+            "name": "src",
+            "type": "string"
           },
           {
-            "name": "medicine_id",
-            "type": "uint256"
-          },
-          {
-            "name": "from",
-            "type": "uint256"
-          },
-          {
-            "name": "to",
-            "type": "uint256"
+            "name": "dest",
+            "type": "string"
           },
           {
             "name": "time",
