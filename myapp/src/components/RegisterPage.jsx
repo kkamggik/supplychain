@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import BlockchainContext from "./Context";
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+
 
 function RegisterPage(props){
     const [first,setFirst] = useState('');
@@ -9,9 +11,6 @@ function RegisterPage(props){
     const [company, setCompany] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
-    const [region, setRegion] = useState('');
-    const [postcode, setPostcode] = useState('');
-    const [country, setCountry] = useState('');
     const [ABN, setABN] = useState('');
     const [identity, setIdentity] = useState('customer');
 
@@ -21,12 +20,11 @@ function RegisterPage(props){
     const navigate = useNavigate();
 
     const handleClick = (e) => {
-        if(first==='' || last==='' || address==='' || region==='' || postcode==='' || country===''){
+        if(first==='' || last==='' || address===''){
             alert("Fill in all required fields.")
         }else{
             const name = first+" "+last;
-            const full_address = `${address}, ${region}, ${country} (${postcode})`;
-            contract.methods.register(name, company, phone, full_address, ABN, identity).send({ from: account })
+            contract.methods.register(name, company, phone, address.label, ABN, identity).send({ from: account })
             .once('receipt', (receipt) => {
                 navigate("/login");
             })
@@ -59,27 +57,12 @@ function RegisterPage(props){
                     </label>
                 </div>
                 <div className="setting_input">
-                    <label>
+                    <label style={{width: "88%" }}>
                         <span>Address</span>
-                        {address==='' ? <input type="text" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} style={{border: "1px solid red"}}/>
-                        : <input type="text" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)}/>}  
-                    </label>
-                    <label>
-                        <span>Region</span>
-                        {region==='' ? <input type="text" id="region" placeholder="Region" value={region} onChange={(e) => setRegion(e.target.value)} style={{border: "1px solid red"}}/> 
-                        : <input type="text" id="region" placeholder="Region" value={region} onChange={(e) => setRegion(e.target.value)}/>}  
-                    </label>
-                </div>
-                <div className="setting_input">
-                    <label>
-                        <span>Postcode</span>
-                        {postcode==='' ? <input type="text" id="postcode" placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)} style={{border: "1px solid red"}}/> 
-                        : <input type="text" id="postcode" placeholder="Postcode" value={postcode} onChange={(e) => setPostcode(e.target.value)}/>}  
-                    </label>
-                    <label>
-                        <span>Country</span>
-                        {country==='' ? <input type="text" id="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} style={{border: "1px solid red"}}/> 
-                        : <input type="text" id="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)}/>}  
+                        <GooglePlacesAutocomplete
+                        apiKey="AIzaSyAJMNRK_il0FStU0WGKZEoYUWb3p6kP5k4"
+                        selectProps={{ address, onChange: setAddress }}
+                        />
                     </label>
                 </div>
                 <div className="setting_input">

@@ -428,6 +428,23 @@ a {
     border-radius: 5px;
 }
 
+.color_delivered {
+    background-color: #a46efa;
+    border: none;
+    border-radius: 5px;
+}
+
+.color_shipped {
+    background-color: #ffbbb8;
+    border: none;
+    border-radius: 5px;
+}
+.color_instock {
+    background-color: #fce76f;
+    border: none;
+    border-radius: 5px;
+}
+
 .button_medicine {
     height: 40px;
     width: 150px;
