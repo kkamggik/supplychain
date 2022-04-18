@@ -25,7 +25,7 @@ function NewUser(props) {
             return (
                 <tr>
                     <td>{user.id}</td>
-                    <td>{user.name}</td>
+                    <td>{user.first}, {user.last}</td>
                     <td>{user.company}</td>
                     <td>{user.addr}</td>
                     <td>{user.abn}</td>

@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0x5143C060D0e0B1ECfB77dC12a7bFef660D280bb2'
+export const SUPPLY_CHAIN_ADDRESS = '0xC9609249db5521b66d0D00549C12b11B07FbE24A'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -31,7 +31,11 @@ export const SUPPLY_CHAIN_ABI = [
         "type": "uint256"
       },
       {
-        "name": "name",
+        "name": "first",
+        "type": "string"
+      },
+      {
+        "name": "last",
         "type": "string"
       },
       {
@@ -197,7 +201,11 @@ export const SUPPLY_CHAIN_ABI = [
     "constant": false,
     "inputs": [
       {
-        "name": "_name",
+        "name": "_first",
+        "type": "string"
+      },
+      {
+        "name": "_last",
         "type": "string"
       },
       {
@@ -226,7 +234,42 @@ export const SUPPLY_CHAIN_ABI = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0x104ace02"
+    "signature": "0x9d0c9fca"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "userId",
+        "type": "uint256"
+      },
+      {
+        "name": "_first",
+        "type": "string"
+      },
+      {
+        "name": "_last",
+        "type": "string"
+      },
+      {
+        "name": "_company",
+        "type": "string"
+      },
+      {
+        "name": "_phone",
+        "type": "string"
+      },
+      {
+        "name": "_addr",
+        "type": "string"
+      }
+    ],
+    "name": "editInfo",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xc6cc0abe"
   },
   {
     "constant": false,
@@ -255,7 +298,11 @@ export const SUPPLY_CHAIN_ABI = [
             "type": "uint256"
           },
           {
-            "name": "name",
+            "name": "first",
+            "type": "string"
+          },
+          {
+            "name": "last",
             "type": "string"
           },
           {
@@ -304,7 +351,11 @@ export const SUPPLY_CHAIN_ABI = [
             "type": "uint256"
           },
           {
-            "name": "name",
+            "name": "first",
+            "type": "string"
+          },
+          {
+            "name": "last",
             "type": "string"
           },
           {
@@ -524,7 +575,7 @@ export const SUPPLY_CHAIN_ABI = [
       {
         "components": [
           {
-            "name": "id",
+            "name": "medicine_id",
             "type": "uint256"
           },
           {
@@ -536,28 +587,12 @@ export const SUPPLY_CHAIN_ABI = [
             "type": "string"
           },
           {
-            "name": "holder",
-            "type": "uint256"
-          },
-          {
-            "name": "manufacturer",
+            "name": "src",
             "type": "string"
           },
           {
-            "name": "directions",
+            "name": "dest",
             "type": "string"
-          },
-          {
-            "name": "mDate",
-            "type": "string"
-          },
-          {
-            "name": "eDate",
-            "type": "string"
-          },
-          {
-            "name": "state",
-            "type": "uint256"
           }
         ],
         "name": "",
@@ -637,6 +672,14 @@ export const SUPPLY_CHAIN_ABI = [
           },
           {
             "name": "state",
+            "type": "uint256"
+          },
+          {
+            "name": "to",
+            "type": "uint256"
+          },
+          {
+            "name": "from",
             "type": "uint256"
           }
         ],

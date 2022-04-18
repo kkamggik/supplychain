@@ -22,6 +22,7 @@ function DetailPage() {
     const [users, setUsers] = useState([]);
     const [destination, setDestination] = useState(0);
     const [transactions, setTransactions] = useState([]);
+    const [last, setLast] = useState(null);
 
     const current_user = JSON.parse(window.localStorage.getItem("user")).id;
 
@@ -33,6 +34,7 @@ function DetailPage() {
         async function getTransaction() {
             const transaction = await contract.methods.getTransactions(medicine.id).call();
             setTransactions(transaction);
+            setLast(transaction[transaction.length - 1]);
         }
         getTransaction();
     }, [])
@@ -95,13 +97,15 @@ function DetailPage() {
                             </Card.Text>
                         </Card.Body>
                     </Card>
+                    {last!=null ? 
                     <div className="button_container">
-                        {medicine.holder === current_user && medicine.state == 1 ? <button className="button_remove" onClick={handleRemove}>Discard</button>
+                        {last.to === current_user && (last.state == 1 || last.state == 4) ? <button className="button_remove" onClick={handleRemove}>Discard</button>
                             : <button className="button_remove" onClick={handleRemove} disabled>Discard</button>}
-                        {medicine.holder === current_user && medicine.state == 1 ? <button className="button_ship" onClick={handleShow}>Send</button>
+                        {last.to === current_user && (last.state == 1 || last.state == 4) ? <button className="button_ship" onClick={handleShow}>Send</button>
                             : <button className="button_ship" onClick={handleShow} disabled>Ship</button>}
-                        <button className="button_receive" onClick={handleReceive}>Receive</button>
-                    </div>
+                        {last.to === current_user && last.state == 3 ? <button className="button_receive" onClick={handleReceive}>Receive</button>
+                            : <button className="button_receive" onClick={handleReceive} disabled>Receive</button>}
+                    </div> : ""}
                 </div>
             </div>
             <Modal show={show} onHide={handleClose} backdrop="static">

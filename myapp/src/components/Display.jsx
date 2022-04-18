@@ -11,7 +11,6 @@ function Display(props) {
                     <td>{medicine.name}</td>
                     <td><Link to="/medicine" state={{ medicine: medicine }}> {medicine.serial}</Link></td>
                     {medicine.state==="1" ? <td><span class="color_instock">In Stock</span></td> : null}
-                    {/* {medicine.state==="2" ? <td><span class="color_delivered">In Progress</span></td> : null} */}
                     {medicine.state==="3" ? <td><span class="color_shipped">Shipped</span></td> : null}
                 </tr>
             )

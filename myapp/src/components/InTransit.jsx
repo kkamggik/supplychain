@@ -10,9 +10,11 @@ function InTransit(props) {
         return medicines.map(medicine => {
             return (
                 <tr>
-                    <td>{medicine.id}</td>
+                    <td>{medicine.medicine_id}</td>
                     <td>{medicine.name}</td>
                     <td><Link to="/medicine" state={{ medicine: medicine }}> {medicine.serial}</Link></td>
+                    <td>{medicine.src}</td>
+                    <td>{medicine.dest}</td>
                 </tr>
             )
         })
@@ -20,12 +22,15 @@ function InTransit(props) {
 
     return (
         <div className="medicine_container">
+            {console.log(medicines)}
             <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Medicine Name</th>
                         <th>Serial Number</th>
+                        <th>Source</th>
+                        <th>Destination</th>
                     </tr>
                 </thead>
                 <tbody>

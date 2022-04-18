@@ -23,8 +23,7 @@ function RegisterPage(props){
         if(first==='' || last==='' || address===''){
             alert("Fill in all required fields.")
         }else{
-            const name = first+" "+last;
-            contract.methods.register(name, company, phone, address.label, ABN, identity).send({ from: account })
+            contract.methods.register(first, last , company, phone, address.label, ABN, identity).send({ from: account })
             .once('receipt', (receipt) => {
                 navigate("/login");
             })

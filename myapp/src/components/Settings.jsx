@@ -18,6 +18,8 @@ function Settings(props) {
     const blockchainContext = useContext(BlockchainContext);
     const { web3, contract, account } = blockchainContext;
 
+    const id = JSON.parse(window.localStorage.getItem("user")).id;
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,7 +29,11 @@ function Settings(props) {
     const getUser = async () => {
         const info = await contract.methods.getUser().call({ from: account });
         setUser(info);
+        setFirst(info.first);
+        setLast(info.last);
         setABN(info.abn);
+        setPhone(info.phone);
+        setCompany(info.company);
         if (info.identity === "2") setIdentity('manufacturer')
         else if (info.identity === '3') setIdentity('supplier')
         else if (info.identity === '4') setIdentity('customer')
@@ -37,8 +43,7 @@ function Settings(props) {
         if (first === '' || last === '' || address === '') {
             alert("Fill in all required fields.")
         } else {
-            const name = first + " " + last;
-            contract.methods.register(name, company, phone, address.label, ABN, identity).send({ from: account })
+            contract.methods.editInfo(id, first, last, company, phone, address.label).send({ from: account })
                 .once('receipt', (receipt) => {
                     navigate("/");
                 })
