@@ -38,16 +38,20 @@ function NavbarPage() {
                 <li>
                     <Link to="/scan"><span className="icon"><MdOutlineQrCodeScanner/></span><span className="title">Scan</span></Link>
                 </li>
+                { current_user!=="1" ?
                 <li>
                     <Link to="/transit"><span className="icon"><MdOutlineLocalShipping/></span><span className="title">In Transit</span></Link>
-                </li>
+                </li> : ""
+                }
+                { current_user!=="1" ?
+                <li>
+                    <Link to="/settings"><span className="icon"><FiSettings/></span><span className="title">Settings</span></Link>
+                </li>: ""
+                }
                 { current_user==="1" ?
                 <li>
                     <Link to="/users"><span className="icon"><AiOutlineUser/></span><span className="title">Users</span></Link>
-                </li> : "" }
-                <li>
-                    <Link to="/settings"><span className="icon"><FiSettings/></span><span className="title">Settings</span></Link>
-                </li>
+                </li> : "" }        
                 <li>
                     <Link to="/login"><span className="icon"><FiLogOut/></span><span className="title">Sign Out</span></Link>
                 </li>

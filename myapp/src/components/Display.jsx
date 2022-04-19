@@ -8,10 +8,14 @@ function Display(props) {
             return (
                 <tr>
                     <td>{medicine.id}</td>
+                    <td>{medicine.manufacturer}</td>
                     <td>{medicine.name}</td>
                     <td><Link to="/medicine" state={{ medicine: medicine }}> {medicine.serial}</Link></td>
-                    {medicine.state==="1" ? <td><span class="color_instock">In Stock</span></td> : null}
-                    {medicine.state==="3" ? <td><span class="color_shipped">Shipped</span></td> : null}
+                    <td>
+                        {medicine.state==="1"? <span class="color_instock">In Stock</span> : ""}
+                        {medicine.state==="0"? <span class="color_discarded">Discarded</span> : ""}
+                        {medicine.state==="3"? <span class="color_shipped">Shipped</span> : ""}
+                    </td>
                 </tr>
             )
         })
@@ -22,6 +26,7 @@ function Display(props) {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Manufacturer</th>
                         <th>Medicine Name</th>
                         <th>Serial Number</th>
                         <th>Status</th>

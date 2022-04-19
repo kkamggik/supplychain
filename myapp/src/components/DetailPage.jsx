@@ -43,7 +43,7 @@ function DetailPage() {
         const userCnt = await contract.methods.userCount().call();
         for (let i = 1; i <= userCnt; i++) {
             const user = await contract.methods.users(i).call();
-            if (user.identity === "2" || user.identity === "3") setUsers(users => [...users, user])
+            if (user.state==1 && (user.identity === "2" || user.identity === "3")) setUsers(users => [...users, user])
         }
     }
 
@@ -78,6 +78,7 @@ function DetailPage() {
 
     return (
         <div className="container_outer">
+            {console.log(users)}
             <NavbarPage />
             <div className="main">
                 <div>

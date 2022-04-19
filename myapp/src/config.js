@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0xC9609249db5521b66d0D00549C12b11B07FbE24A'
+export const SUPPLY_CHAIN_ADDRESS = '0x6fAc541B260c4C33f8086fB7b47876DED096d005'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -289,6 +289,74 @@ export const SUPPLY_CHAIN_ABI = [
   {
     "constant": true,
     "inputs": [],
+    "name": "getUsers",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "first",
+            "type": "string"
+          },
+          {
+            "name": "last",
+            "type": "string"
+          },
+          {
+            "name": "company",
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "type": "string"
+          },
+          {
+            "name": "addr",
+            "type": "string"
+          },
+          {
+            "name": "abn",
+            "type": "string"
+          },
+          {
+            "name": "identity",
+            "type": "uint256"
+          },
+          {
+            "name": "state",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x00ce8e3e"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "deleteUser",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x38f14845"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "newRegistration",
     "outputs": [
       {
@@ -575,7 +643,7 @@ export const SUPPLY_CHAIN_ABI = [
       {
         "components": [
           {
-            "name": "medicine_id",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -587,12 +655,28 @@ export const SUPPLY_CHAIN_ABI = [
             "type": "string"
           },
           {
-            "name": "src",
+            "name": "holder",
+            "type": "uint256"
+          },
+          {
+            "name": "manufacturer",
             "type": "string"
           },
           {
-            "name": "dest",
+            "name": "directions",
             "type": "string"
+          },
+          {
+            "name": "mDate",
+            "type": "string"
+          },
+          {
+            "name": "eDate",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "uint256"
           }
         ],
         "name": "",

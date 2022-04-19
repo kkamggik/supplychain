@@ -19,6 +19,15 @@ function NewUser(props) {
             })
         e.preventDefault();
     }
+    const removeUser = async(e) => {
+        // const response = await contract.methods.addUser(e.target.value).call({ from: account })
+        // console.log(response)
+        contract.methods.deleteUser(e.target.value).send({ from: account })
+            .once('receipt', (receipt) => {
+                getNewUsers();
+            })
+        e.preventDefault();
+    }
 
     const displayNewUsers = () => {
         return users.map(user => {
@@ -29,7 +38,12 @@ function NewUser(props) {
                     <td>{user.company}</td>
                     <td>{user.addr}</td>
                     <td>{user.abn}</td>
-                    <td><button class="button_confirm" value={user.id} onClick={addUser}>confirm</button></td>
+                    <td>{
+                        user.state==="0"?
+                        <button class="button_confirm" value={user.id} onClick={addUser}>Confirm</button> :
+                        <button class="button_discard" value={user.id} onClick={removeUser}>Remove</button> 
+                    }
+                    </td>
                 </tr>
             )
         })
