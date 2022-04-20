@@ -14,8 +14,6 @@ function UserPage() {
     }, [])
 
     async function getNewUsers() {
-        // const user = await contract.methods.newUsers(1).call();
-        // console.log(user)
         setUsers([]);
         const users = await contract.methods.getUsers().call();   
         setUsers(users);

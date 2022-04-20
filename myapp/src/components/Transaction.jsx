@@ -10,10 +10,10 @@ function Transaction(props) {
                     <td>{transaction.src}</td>
                     <td>{transaction.dest}</td>
                     <td>{transaction.time}</td>
-                    {transaction.state === "1" ? <td><span class="status">Manufactured</span></td> : null}
-                    {transaction.state === "2" ? <td><span class="status">Discarded</span></td> : null}
-                    {transaction.state === "3" ? <td><span class="status">Shipped</span></td> : null}
-                    {transaction.state === "4" ? <td><span class="status">Received</span></td> : null}
+                    {transaction.state === "1" ? <td><span class="status color_instock">Manufactured</span></td> : null}
+                    {transaction.state === "2" ? <td><span class="status color_discarded">Discarded</span></td> : null}
+                    {transaction.state === "3" ? <td><span class="status color_shipped">Shipped</span></td> : null}
+                    {transaction.state === "4" ? <td><span class="status color_received">Received</span></td> : null}
                 </tr>
             )
         })

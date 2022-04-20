@@ -78,9 +78,9 @@ function DetailPage() {
 
     return (
         <div className="container_outer">
-            {console.log(users)}
             <NavbarPage />
             <div className="main">
+            {medicine.id!=="0" ? 
                 <div>
                     <Card className="text-center" style={{ marginTop: "50px", border: "none" }}>
                         <Card.Img variant="top" src={url} style={{ width: 200, height: 200, margin: "auto", marginTop: 20 }} />
@@ -108,6 +108,7 @@ function DetailPage() {
                             : <button className="button_receive" onClick={handleReceive} disabled>Receive</button>}
                     </div> : ""}
                 </div>
+                : <h3 style={{marginTop:"100px"}}>Medicine Not Found</h3> }
             </div>
             <Modal show={show} onHide={handleClose} backdrop="static">
                 <Modal.Header closeButton>
