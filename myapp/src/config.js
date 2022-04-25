@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0x6fAc541B260c4C33f8086fB7b47876DED096d005'
+export const SUPPLY_CHAIN_ADDRESS = '0x57937105d1e1B229bd68Ac9eD383FeC9F195af68'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -61,6 +61,10 @@ export const SUPPLY_CHAIN_ABI = [
       {
         "name": "state",
         "type": "uint256"
+      },
+      {
+        "name": "account",
+        "type": "address"
       }
     ],
     "payable": false,
@@ -328,6 +332,10 @@ export const SUPPLY_CHAIN_ABI = [
           {
             "name": "state",
             "type": "uint256"
+          },
+          {
+            "name": "account",
+            "type": "address"
           }
         ],
         "name": "",
@@ -396,6 +404,10 @@ export const SUPPLY_CHAIN_ABI = [
           {
             "name": "state",
             "type": "uint256"
+          },
+          {
+            "name": "account",
+            "type": "address"
           }
         ],
         "name": "",
@@ -449,6 +461,10 @@ export const SUPPLY_CHAIN_ABI = [
           {
             "name": "state",
             "type": "uint256"
+          },
+          {
+            "name": "account",
+            "type": "address"
           }
         ],
         "name": "",

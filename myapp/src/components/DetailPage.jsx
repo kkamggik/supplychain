@@ -122,7 +122,7 @@ function DetailPage() {
                                 <option value="0"> Select destination</option>
                                 {users.map(user => {
                                     return (
-                                        <option value={user.id}>{user.company} ({user.addr})</option>
+                                        <option value={user.id}>{user.account} - {user.company} ({user.addr})</option>
                                     )
                                 })}
                             </Form.Select>

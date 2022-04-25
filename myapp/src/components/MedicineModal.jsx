@@ -15,7 +15,6 @@ function MedicineModal(props) {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [medicineName, setMedicineName] = useState('');
-    const [manufacturerName, setManufacturerName] = useState('');
     const [direction, setDirection] = useState('');
     const [serialNumber, setSerialNumber] = useState('');
     const [showQR, setShowQR] = useState(false);
@@ -48,10 +47,6 @@ function MedicineModal(props) {
                         <Form.Group className="mb-3" controlId="medicineName">
                             <Form.Label>Medicine Name</Form.Label>
                             <Form.Control type="text" placeholder="Medicine Name" onChange={(e) => setMedicineName(e.target.value)} />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="manufacturerName">
-                            <Form.Label>Manufacturer Name</Form.Label>
-                            <Form.Control type="text" placeholder="Manufacturer Name" onChange={(e) => setManufacturerName(e.target.value)} />
                         </Form.Group>
                         <Row className="align-items-center">
                             <Col xs={6}>
