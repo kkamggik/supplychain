@@ -72,9 +72,10 @@ function RegisterPage(props){
                     <label>
                         <span>Identity</span>
                         <select className="select_container" value={identity} onChange={(e) => setIdentity(e.target.value)}>
-                        <option selected value="customer">Customer</option>
-                        <option value="supplier">Supplier</option>
                         <option value="manufacturer">Manufacturer</option>
+                        <option value="pharmacist">Pharmacist</option>
+                        <option selected value="customer">Customer</option>
+                        <option value="distributor">Distributor</option>
                     </select>
                     </label>
                 </div>

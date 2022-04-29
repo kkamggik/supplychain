@@ -25,7 +25,7 @@ function DetailPage() {
     const [last, setLast] = useState(null);
 
     const current_user = JSON.parse(window.localStorage.getItem("user")).id;
-
+    const current_identity = JSON.parse(window.localStorage.getItem("user")).identity;
     useEffect(() => {
         getUsers()
     }, [])
@@ -43,7 +43,7 @@ function DetailPage() {
         const userCnt = await contract.methods.userCount().call();
         for (let i = 1; i <= userCnt; i++) {
             const user = await contract.methods.users(i).call();
-            if (user.state==1 && (user.identity === "2" || user.identity === "3")) setUsers(users => [...users, user])
+            if (user.state==1 && (user.identity === "2" || user.identity === "3" || user.identity === "4")) setUsers(users => [...users, user])
         }
     }
 
@@ -53,6 +53,15 @@ function DetailPage() {
         console.log(`remove medicine #${medicine.id}`);
         const time = new Date().toUTCString();
         contract.methods.removeMedicine(medicine.id, time).send({ from: account })
+            .once('receipt', (receipt) => {
+                navigate("/");
+            })
+    }
+
+    const handlePickUp = (e) => {
+        console.log(`deliver medicine #${medicine.id} to patient`);
+        const time = new Date().toUTCString();
+        contract.methods.deliverMedicine(medicine.id, time).send({ from: account })
             .once('receipt', (receipt) => {
                 navigate("/");
             })
@@ -100,12 +109,14 @@ function DetailPage() {
                     </Card>
                     {last!=null ? 
                     <div className="button_container">
-                        {last.to === current_user && (last.state == 1 || last.state == 4) ? <button className="button_remove" onClick={handleRemove}>Discard</button>
-                            : <button className="button_remove" onClick={handleRemove} disabled>Discard</button>}
+                        { (current_identity==="2" || current_identity==="4" ) && (last.to === current_user) && (last.state == 1 || last.state == 4) ? <button className="button_remove" onClick={handleRemove}>Discard</button>
+                            : <button className="button_remove" disabled>Discard</button>}
+                        { (current_identity==="4") && (last.to === current_user) && (last.state == 1 || last.state == 4) ? <button className="button_pickup" onClick={handlePickUp}>PickUp</button>
+                            : <button className="button_pickup" disabled>PickUp</button>}
                         {last.to === current_user && (last.state == 1 || last.state == 4) ? <button className="button_ship" onClick={handleShow}>Send</button>
-                            : <button className="button_ship" onClick={handleShow} disabled>Ship</button>}
+                            : <button className="button_ship" disabled>Ship</button>}
                         {last.to === current_user && last.state == 3 ? <button className="button_receive" onClick={handleReceive}>Receive</button>
-                            : <button className="button_receive" onClick={handleReceive} disabled>Receive</button>}
+                            : <button className="button_receive" disabled>Receive</button>}
                     </div> : ""}
                 </div>
                 : <h3 style={{marginTop:"100px"}}>Medicine Not Found</h3> }

@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0x57937105d1e1B229bd68Ac9eD383FeC9F195af68'
+export const SUPPLY_CHAIN_ADDRESS = '0x4a06464e51e6fa4b79bb66Cea798d227BD6a10FA'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -529,6 +529,25 @@ export const SUPPLY_CHAIN_ABI = [
     "stateMutability": "nonpayable",
     "type": "function",
     "signature": "0xf0ab4624"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "medicineId",
+        "type": "uint256"
+      },
+      {
+        "name": "_date",
+        "type": "string"
+      }
+    ],
+    "name": "deliverMedicine",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xe92d77b9"
   },
   {
     "constant": true,

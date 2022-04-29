@@ -396,14 +396,14 @@ a {
 
 .button_remove{
     height: 50px;
-    width: 300px;
+    width: 200px;
     background-color: rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 5px;
 }
 .button_ship{
     height: 50px;
-    width: 300px;
+    width: 200px;
     background-color: #ffcfd2;
     border: none;
     border-radius: 5px;
@@ -411,8 +411,16 @@ a {
 
 .button_receive{
     height: 50px;
-    width: 300px;
+    width: 200px;
     background-color: #cdedfd;
+    border: none;
+    border-radius: 5px;
+}
+
+.button_pickup {
+    height: 50px;
+    width: 200px;
+    background-color: #fffd73;
     border: none;
     border-radius: 5px;
 }
@@ -460,6 +468,11 @@ a {
 }
 .color_received {
     background-color: #94dafa;
+    border: none;
+    border-radius: 5px;
+}
+.color_delivered {
+    background-color: #af94fa;
     border: none;
     border-radius: 5px;
 }

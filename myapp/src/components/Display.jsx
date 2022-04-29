@@ -15,6 +15,7 @@ function Display(props) {
                         {medicine.state==="1"? <span class="color_instock">In Stock</span> : ""}
                         {medicine.state==="0"? <span class="color_discarded">Discarded</span> : ""}
                         {medicine.state==="3"? <span class="color_shipped">Shipped</span> : ""}
+                        {medicine.state==="5"? <span class="color_delivered">Picked Up</span> : ""}
                     </td>
                 </tr>
             )
