@@ -41,7 +41,7 @@ function NewUser(props) {
                     <td>{
                         user.state==="0"?
                         <button class="button_confirm" value={user.id} onClick={addUser}>Confirm</button> :
-                        <button class="button_discard" value={user.id} onClick={removeUser}>Remove</button> 
+                        <button class="button_discard" value={user.id} onClick={removeUser} disabled={true ? user.identity==="1": false}>Remove</button> 
                     }
                     </td>
                 </tr>

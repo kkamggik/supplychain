@@ -1,4 +1,4 @@
-export const SUPPLY_CHAIN_ADDRESS = '0x4a06464e51e6fa4b79bb66Cea798d227BD6a10FA'
+export const SUPPLY_CHAIN_ADDRESS = '0x28Ff6187BF7ed740E84AcDd1a4Fe989A6CAE05c4'
 
 export const SUPPLY_CHAIN_ABI = [
   {
@@ -792,6 +792,14 @@ export const SUPPLY_CHAIN_ABI = [
           {
             "name": "state",
             "type": "uint256"
+          },
+          {
+            "name": "src_addr",
+            "type": "address"
+          },
+          {
+            "name": "dest_addr",
+            "type": "address"
           },
           {
             "name": "to",

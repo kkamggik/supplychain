@@ -30,6 +30,7 @@ function MedicineModal(props) {
         const time = new Date().toUTCString();
         contract.methods.addMedicine(medicineName, serial, direction, startDate, endDate, time).send({ from: account })
             .once('receipt', (receipt) => {
+                console.log(receipt)
                 handleQRShow();
                 getMedicines();
             })

@@ -87,6 +87,7 @@ function DetailPage() {
 
     return (
         <div className="container_outer">
+            {console.log(last)}
             <NavbarPage />
             <div className="main">
             {medicine.id!=="0" ? 
