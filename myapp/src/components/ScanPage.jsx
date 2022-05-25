@@ -53,7 +53,8 @@ function ScanPage() {
                     <input name="file" type="file" onChange={handleFileSelect} style={{marginLeft:"8em"}}/>
                     <button onClick={handleSubmit} className="button_read">Read QR code</button>
                     </div>
-                    <div style={{margin: "40px 0px"}}>OR</div>
+                    {/* <div style={{margin: "40px 0px"}}>OR</div> */}
+                    <hr style={{margin: "40px"}} width="60%"/>
                     <div style={{display:"flex", flexDirection: "column", alignItems: "center"}} className="serial_input">
                     <input type="text" id="medId" placeholder="Medicine Serial Number" value={medId} onChange={(e) => setMedId(e.target.value)}/>
                     <button onClick={handleButton} className="button_read">Search</button>

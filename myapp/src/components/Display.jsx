@@ -7,7 +7,6 @@ function Display(props) {
         return medicines.map(medicine => {
             return (
                 <tr>
-                    <td>{medicine.id}</td>
                     <td>{medicine.manufacturer}</td>
                     <td>{medicine.name}</td>
                     <td><Link to="/medicine" state={{ medicine: medicine }}> {medicine.serial}</Link></td>
@@ -26,8 +25,7 @@ function Display(props) {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Manufacturer</th>
+                        <th>Manufacturing Company</th>
                         <th>Medicine Name</th>
                         <th>Serial Number</th>
                         <th>Status</th>
